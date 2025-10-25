@@ -1,0 +1,235 @@
+/* Inturious Labs Custom Styles */
+
+:root {
+  --spacing-company: 3rem;
+}
+
+/* Background */
+body {
+  background-color: #2d2d2d;
+  color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: var(--spacing-company) 0;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hero p {
+  color: #e0e0e0;
+}
+
+/* Navigation */
+.back-link {
+  margin-bottom: 2rem;
+}
+
+/* Products Section */
+.products {
+  margin-top: var(--spacing-company);
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  padding: 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  color: #2d2d2d;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.product-card h3 {
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  color: #1a1a1a;
+}
+
+.product-card p {
+  margin-bottom: 1rem;
+  color: #4a4a4a;
+  flex-grow: 1;
+}
+
+/* Pastel card colors - cycling through different cards */
+.product-card:nth-child(10n+1) {
+  background: linear-gradient(135deg, #ffd1dc 0%, #ffb3c6 100%); /* Soft pink */
+}
+
+.product-card:nth-child(10n+2) {
+  background: linear-gradient(135deg, #d4f1f4 0%, #b8e6ea 100%); /* Soft cyan */
+}
+
+.product-card:nth-child(10n+3) {
+  background: linear-gradient(135deg, #e0d4f7 0%, #d0bfef 100%); /* Soft lavender */
+}
+
+.product-card:nth-child(10n+4) {
+  background: linear-gradient(135deg, #fff4b8 0%, #ffe99a 100%); /* Soft yellow */
+}
+
+.product-card:nth-child(10n+5) {
+  background: linear-gradient(135deg, #ffd9b3 0%, #ffcb99 100%); /* Soft peach */
+}
+
+.product-card:nth-child(10n+6) {
+  background: linear-gradient(135deg, #d4f4dd 0%, #bcecc9 100%); /* Soft mint */
+}
+
+.product-card:nth-child(10n+7) {
+  background: linear-gradient(135deg, #ffd4e5 0%, #ffbfd9 100%); /* Soft rose */
+}
+
+.product-card:nth-child(10n+8) {
+  background: linear-gradient(135deg, #d4e4f7 0%, #bfd5f0 100%); /* Soft blue */
+}
+
+.product-card:nth-child(10n+9) {
+  background: linear-gradient(135deg, #f4e4d4 0%, #ead5bf 100%); /* Soft tan */
+}
+
+.product-card:nth-child(10n+10) {
+  background: linear-gradient(135deg, #e4f4e4 0%, #d0ecd0 100%); /* Soft green */
+}
+
+.product-card a {
+  margin-top: auto;
+  width: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #1a1a1a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.product-card a::after {
+  content: ' →';
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.product-card a:hover {
+  background: none;
+  color: #000;
+  transform: none;
+}
+
+.product-card a:hover::after {
+  transform: translateX(4px);
+}
+
+/* Features Section */
+.features {
+  margin-top: var(--spacing-company);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.feature-item h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Roadmap Section */
+.roadmap {
+  margin-top: var(--spacing-company);
+}
+
+.roadmap-item {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--primary);
+}
+
+.roadmap-item h4 {
+  margin-bottom: 0.25rem;
+}
+
+.roadmap-item p {
+  color: var(--muted-color);
+  margin: 0;
+}
+
+/* Status Badge - Corner Stripe */
+.status-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.35rem 2rem;
+  font-size: 0.65rem;
+  background-color: #60a5fa;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transform: rotate(45deg) translate(30%, -50%);
+  transform-origin: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.status-badge.live {
+  background-color: #10b981;
+}
+
+.status-badge.development {
+  background-color: #f59e0b;
+}
+
+/* About Section */
+section {
+  text-align: center;
+}
+
+section p {
+  color: #e0e0e0;
+}
+
+/* Footer */
+footer {
+  margin-top: var(--spacing-company);
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid #555;
+  color: #b0b0b0;
+}
