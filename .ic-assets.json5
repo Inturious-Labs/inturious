@@ -1,5 +1,9 @@
 [
   {
+    "match": ".well-known",
+    "ignore": false
+  },
+  {
     "match": "**/*",
     "headers": {
       "X-Content-Type-Options": "nosniff",
