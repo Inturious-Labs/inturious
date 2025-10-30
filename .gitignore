@@ -34,7 +34,6 @@ build/
 
 # Internet Computer
 .dfx/
-canister_ids.json
 
 # Temporary files
 tmp/

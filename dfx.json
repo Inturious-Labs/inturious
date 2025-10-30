@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "canisters": {
+    "inturious_frontend": {
+      "type": "assets",
+      "source": [
+        "."
+      ]
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "providers": ["https://ic0.app"],
+      "type": "persistent"
+    }
+  }
+}
