@@ -40,15 +40,6 @@ jobs:
           export PATH="$HOME/.local/share/dfx/versions/0.24.3:$PATH"
           $HOME/.local/share/dfx/versions/0.24.3/dfx --version
 
-      - name: Create canister_ids.json
-        run: |
-          mkdir -p .
-          echo '{
-            "inturious_frontend": {
-              "ic": "${{ vars.PRODUCTION_CANISTER_ID }}"
-            }
-          }' > canister_ids.json
-
       - name: Import DFX Identity
         run: |
           export PATH="$HOME/.local/share/dfx/versions/0.24.3:$PATH"
@@ -68,4 +59,4 @@ jobs:
         run: |
           echo "✅ Deployment Complete!"
           echo "Canister ID: ${{ vars.PRODUCTION_CANISTER_ID }}"
-          echo "URL: https://${{ vars.PRODUCTION_CANISTER_ID }}.ic0.app"
+          echo "URL: https://${{ vars.PRODUCTION_CANISTER_ID }}.icp0.io"
