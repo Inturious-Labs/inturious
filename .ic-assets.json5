@@ -4,6 +4,10 @@
     "ignore": false
   },
   {
+    "match": "products/_template/**",
+    "ignore": true
+  },
+  {
     "match": "**/*",
     "headers": {
       "X-Content-Type-Options": "nosniff"
