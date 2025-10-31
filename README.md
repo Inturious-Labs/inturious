@@ -52,17 +52,52 @@ dfx deploy --network ic
 ```
 inturious/
 ├── index.html              # Main landing page
-├── readly/
-│   └── index.html         # Readly product page
+├── products/
+│   ├── _template/          # Product page template (not deployed)
+│   │   └── index.html
+│   ├── readly/
+│   │   └── index.html     # Readly product page
+│   └── ...                 # Other product pages
 ├── css/
 │   ├── pico.min.css       # CSS framework
 │   └── style.css          # Custom styles
+├── scripts/
+│   └── analytics.js       # Google Analytics
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml     # CI/CD deployment
 ├── dfx.json               # IC canister configuration
 └── .ic-assets.json5       # Content-type headers
 ```
+
+## Adding a New Product
+
+1. **Copy the template:**
+   ```bash
+   cp -r products/_template products/your-product-name
+   ```
+
+2. **Edit the product page:**
+   - Open `products/your-product-name/index.html`
+   - Replace all `[placeholder text]` with actual content
+   - Fill in these sections:
+     - Who Is This For
+     - The Problem
+     - The Solution
+     - Key Advantages
+
+3. **Add to homepage:**
+   - Edit `index.html`
+   - Add a product card in the `<div class="products-grid">` section
+
+4. **Commit and deploy:**
+   ```bash
+   git add products/your-product-name index.html
+   git commit -m "Add [product name] to portfolio"
+   git push
+   ```
+
+Note: The `products/_template/` directory is excluded from deployment via `.ic-assets.json5`.
 
 ## Contact
 
