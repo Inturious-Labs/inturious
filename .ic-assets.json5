@@ -6,8 +6,7 @@
   {
     "match": "**/*",
     "headers": {
-      "X-Content-Type-Options": "nosniff",
-      "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline';"
+      "X-Content-Type-Options": "nosniff"
     },
     "security_policy": "standard"
   },
