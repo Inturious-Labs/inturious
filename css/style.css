@@ -18,6 +18,13 @@ h2 {
   color: #f472b6;
 }
 
+/* Product page section headings - pistachio with opacity */
+.container section h2,
+.comments-section h2 {
+  color: #D4E7B0;
+  opacity: 0.4;
+}
+
 p, li {
   color: #f5f5f5;
 }
@@ -84,6 +91,36 @@ p, li {
 /* Navigation */
 .back-link {
   margin-bottom: 2rem;
+}
+
+/* Product Page Layout - Constrain content width on desktop */
+.container {
+  max-width: 100%;
+}
+
+.container > section,
+.container > .back-link,
+.container > hr,
+.container > footer,
+.container > div:not(.hero-image-section) {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure Rapport widget container is properly constrained */
+.comments-section {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+/* Hero image same width as content */
+.container > .hero-image-section {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Products Section */
