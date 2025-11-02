@@ -342,13 +342,17 @@ footer {
   margin-top: var(--spacing-company);
   padding: 2rem 0;
   text-align: center;
-  border-top: 1px solid #555;
   color: #f5f5f5;
 }
 
-footer p,
+footer p {
+  color: rgba(245, 245, 245, 0.4);
+  font-size: 1rem;
+}
+
 footer small {
-  color: #f5f5f5;
+  color: rgba(245, 245, 245, 0.4);
+  font-size: 1rem;
 }
 
 /* Mobile Responsive */
