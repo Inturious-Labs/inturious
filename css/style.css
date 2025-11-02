@@ -18,6 +18,10 @@ h2 {
   color: #f472b6;
 }
 
+p, li {
+  color: #f5f5f5;
+}
+
 /* Hero Section */
 .hero {
   text-align: center;
@@ -129,7 +133,7 @@ h2 {
 
 /* Pastel card colors - cycling through different cards */
 .product-card:nth-child(10n+1) {
-  background: linear-gradient(135deg, #ffd1dc 0%, #ffb3c6 100%); /* Soft pink */
+  background: linear-gradient(135deg, #D4E7B0 0%, #c5d9a1 100%); /* Pistachio */
 }
 
 .product-card:nth-child(10n+2) {
