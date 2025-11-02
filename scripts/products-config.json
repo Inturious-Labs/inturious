@@ -34,6 +34,12 @@
       "name": "Readly",
       "slogan": "Fast, reliable, and privacy-focused QR code scanning",
       "color": "blue"
+    },
+    {
+      "slug": "digital-sovereignty-chronicle",
+      "name": "Digital Sovereignty Chronicle",
+      "slogan": "Newsletter on AI, crypto, productivity hack, decentralization, and data sovereignty",
+      "color": "pistachio"
     }
   ]
 }
