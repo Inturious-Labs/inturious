@@ -2,6 +2,31 @@
 
 :root {
   --spacing-company: 3rem;
+
+  /* Pastel Color Palette */
+  --color-blue: #B4D4FF;
+  --color-pink: #FFD6E8;
+  --color-lavender: #E0BBE4;
+  --color-mint: #C8E6C9;
+  --color-peach: #FFD4B2;
+  --color-lilac: #D4C5F9;
+  --color-sky: #A7D8DE;
+  --color-coral: #FFB3BA;
+  --color-sage: #B4CFB0;
+  --color-lemon: #FFF4B3;
+  --color-rose: #FFB3C6;
+  --color-periwinkle: #C5D3E8;
+  --color-aqua: #B3E5E6;
+  --color-apricot: #FED8B1;
+  --color-mauve: #E8C4D4;
+  --color-pistachio: #D4E7B0;
+  --color-powder: #C8E0F0;
+  --color-seafoam: #B8E6D5;
+  --color-vanilla: #FFF9E3;
+  --color-blush: #FFD5CD;
+
+  /* Default product color (pink) */
+  --product-color: var(--color-pink);
 }
 
 /* Background */
@@ -18,10 +43,10 @@ h2 {
   color: #f472b6;
 }
 
-/* Product page section headings - pistachio with opacity */
+/* Product page section headings - use product color variable */
 .container section h2,
 .comments-section h2 {
-  color: #D4E7B0;
+  color: var(--product-color);
   opacity: 0.4;
 }
 
@@ -171,8 +196,15 @@ p, li {
 
 .product-card-link:hover .product-card,
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.1);
+}
+
+.product-card-link:active .product-card,
+.product-card:active {
+  transform: translateY(-6px);
+  filter: brightness(1.15);
 }
 
 .product-card h3 {
@@ -187,55 +219,17 @@ p, li {
   flex-grow: 1;
 }
 
-/* Pastel card colors - cycling through different cards */
-.products-grid > :nth-child(10n+1) .product-card,
-.product-card:nth-child(10n+1) {
-  background: linear-gradient(135deg, #D4E7B0 0%, #c5d9a1 100%); /* Pistachio */
+/* Default pastel card color - all cards use same default */
+.product-card {
+  background: linear-gradient(135deg, var(--color-pink) 0%, color-mix(in srgb, var(--color-pink) 70%, black) 100%); /* Default pink gradient - darker for more contrast */
+  filter: brightness(0.95);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-.products-grid > :nth-child(10n+2) .product-card,
-.product-card:nth-child(10n+2) {
-  background: linear-gradient(135deg, #d4f1f4 0%, #b8e6ea 100%); /* Soft cyan */
-}
-
-.products-grid > :nth-child(10n+3) .product-card,
-.product-card:nth-child(10n+3) {
-  background: linear-gradient(135deg, #e0d4f7 0%, #d0bfef 100%); /* Soft lavender */
-}
-
-.products-grid > :nth-child(10n+4) .product-card,
-.product-card:nth-child(10n+4) {
-  background: linear-gradient(135deg, #fff4b8 0%, #ffe99a 100%); /* Soft yellow */
-}
-
-.products-grid > :nth-child(10n+5) .product-card,
-.product-card:nth-child(10n+5) {
-  background: linear-gradient(135deg, #ffd9b3 0%, #ffcb99 100%); /* Soft peach */
-}
-
-.products-grid > :nth-child(10n+6) .product-card,
-.product-card:nth-child(10n+6) {
-  background: linear-gradient(135deg, #d4f4dd 0%, #bcecc9 100%); /* Soft mint */
-}
-
-.products-grid > :nth-child(10n+7) .product-card,
-.product-card:nth-child(10n+7) {
-  background: linear-gradient(135deg, #ffd4e5 0%, #ffbfd9 100%); /* Soft rose */
-}
-
-.products-grid > :nth-child(10n+8) .product-card,
-.product-card:nth-child(10n+8) {
-  background: linear-gradient(135deg, #d4e4f7 0%, #bfd5f0 100%); /* Soft blue */
-}
-
-.products-grid > :nth-child(10n+9) .product-card,
-.product-card:nth-child(10n+9) {
-  background: linear-gradient(135deg, #f4e4d4 0%, #ead5bf 100%); /* Soft tan */
-}
-
-.products-grid > :nth-child(10n+10) .product-card,
-.product-card:nth-child(10n+10) {
-  background: linear-gradient(135deg, #e4f4e4 0%, #d0ecd0 100%); /* Soft green */
+/* Hidden cards - hide until populated */
+.product-card.hidden,
+.product-card-link.hidden {
+  display: none;
 }
 
 .product-card a {
