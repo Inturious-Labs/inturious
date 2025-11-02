@@ -58,7 +58,7 @@ p, li {
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: var(--spacing-company) 0;
+  padding: 1rem 0 0.5rem 0;
 }
 
 .hero h1 {
@@ -73,7 +73,7 @@ p, li {
 /* Hero Image Section */
 .hero-image-section {
   position: relative;
-  margin: 2rem 0;
+  margin: 1rem 0;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -151,7 +151,7 @@ p, li {
 
 /* Products Section */
 .products {
-  margin-top: var(--spacing-company);
+  margin-top: 1.5rem;
   text-align: center;
 }
 
@@ -211,6 +211,10 @@ p, li {
   margin-bottom: 0.5rem;
   margin-top: 0;
   color: #1a1a1a;
+  min-height: 3.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .product-card p {
