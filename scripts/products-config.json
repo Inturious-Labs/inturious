@@ -46,6 +46,12 @@
       "name": "The Sunday Blender",
       "slogan": "Weekly newsletter for curious kids aged 8~15 to learn about the world",
       "color": "blue"
+    },
+    {
+      "slug": "herbert-yang-blog",
+      "name": "Herbert Yang",
+      "slogan": "The digital garden of Herbert Yang",
+      "color": "coral"
     }
   ]
 }
