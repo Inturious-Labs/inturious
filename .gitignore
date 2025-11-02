@@ -39,3 +39,4 @@ build/
 tmp/
 temp/
 *.tmp
+scripts/__pycache__/

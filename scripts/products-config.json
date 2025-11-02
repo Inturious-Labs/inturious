@@ -1,0 +1,39 @@
+{
+  "settings": {
+    "image_width": 1200,
+    "image_height": 630,
+    "font_title_size": 120,
+    "font_slogan_size": 48,
+    "text_color": "#2d2d2d"
+  },
+  "pastel_colors": {
+    "blue": "#B4D4FF",
+    "pink": "#FFD6E8",
+    "lavender": "#E0BBE4",
+    "mint": "#C8E6C9",
+    "peach": "#FFD4B2",
+    "lilac": "#D4C5F9",
+    "sky": "#A7D8DE",
+    "coral": "#FFB3BA",
+    "sage": "#B4CFB0",
+    "lemon": "#FFF4B3",
+    "rose": "#FFB3C6",
+    "periwinkle": "#C5D3E8",
+    "aqua": "#B3E5E6",
+    "apricot": "#FED8B1",
+    "mauve": "#E8C4D4",
+    "pistachio": "#D4E7B0",
+    "powder": "#C8E0F0",
+    "seafoam": "#B8E6D5",
+    "vanilla": "#FFF9E3",
+    "blush": "#FFD5CD"
+  },
+  "products": [
+    {
+      "slug": "readly",
+      "name": "Readly",
+      "slogan": "Fast, reliable, and privacy-focused QR code scanning",
+      "color": "blue"
+    }
+  ]
+}
