@@ -52,6 +52,12 @@
       "name": "Herbert Yang",
       "slogan": "The digital garden of Herbert Yang",
       "color": "coral"
+    },
+    {
+      "slug": "ic123",
+      "name": "ic123",
+      "slogan": "Internet Computer developer resources in Chinese",
+      "color": "vanilla"
     }
   ]
 }
