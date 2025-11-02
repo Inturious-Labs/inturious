@@ -40,6 +40,12 @@
       "name": "Digital Sovereignty Chronicle",
       "slogan": "Newsletter on AI, crypto, productivity hack, decentralization, and data sovereignty",
       "color": "pistachio"
+    },
+    {
+      "slug": "the-sunday-blender",
+      "name": "The Sunday Blender",
+      "slogan": "Weekly newsletter for curious kids aged 8~15 to learn about the world",
+      "color": "blue"
     }
   ]
 }
