@@ -64,6 +64,12 @@
       "name": "Rapport",
       "slogan": "a light-weight comments plugin to drive hassle-free engagement with your readers",
       "color": "sky"
+    },
+    {
+      "slug": "lumen",
+      "name": "Lumen",
+      "slogan": "make photo sharing great again",
+      "color": "peach"
     }
   ]
 }
