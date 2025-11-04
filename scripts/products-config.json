@@ -58,6 +58,12 @@
       "name": "ic123",
       "slogan": "Internet Computer developer resources in Chinese",
       "color": "vanilla"
+    },
+    {
+      "slug": "rapport",
+      "name": "Rapport",
+      "slogan": "a light-weight comments plugin to drive hassle-free engagement with your readers",
+      "color": "sky"
     }
   ]
 }
