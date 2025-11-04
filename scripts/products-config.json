@@ -70,6 +70,12 @@
       "name": "Lumen",
       "slogan": "make photo sharing great again",
       "color": "peach"
+    },
+    {
+      "slug": "flux",
+      "name": "Flux",
+      "slogan": "a prolific content creator's mission-control room for writing multiple publications simultaneously",
+      "color": "mint"
     }
   ]
 }
