@@ -370,6 +370,27 @@ footer small {
   font-size: 1rem;
 }
 
+/* Social Links */
+.social-links {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: rgba(245, 245, 245, 0.6);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links a:hover {
+  color: #22d3ee;
+  transform: translateY(-2px);
+}
+
 /* IC Logo in footer */
 .powered-by {
   display: flex;
