@@ -370,6 +370,20 @@ footer small {
   font-size: 1rem;
 }
 
+/* IC Logo in footer */
+.powered-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic-logo {
+  height: 20px;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero-quote {
