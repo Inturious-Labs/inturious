@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C8E6C9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A7D8DE;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Define one perfect ray, will rotate it 8 times -->
+    <g id="ray">
+      <polygon points="0,-35 4,-12 -4,-12" fill="#2d2d2d"/>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="128" height="128" rx="16" fill="url(#bgGradient)"/>
+
+  <!-- Geometric Burst - Perfectly Symmetrical -->
+  <g transform="translate(64, 45)">
+    <!-- 8 rays, each rotated by exactly 45° -->
+    <use href="#ray" transform="rotate(0)"/>
+    <use href="#ray" transform="rotate(45)"/>
+    <use href="#ray" transform="rotate(90)"/>
+    <use href="#ray" transform="rotate(135)"/>
+    <use href="#ray" transform="rotate(180)"/>
+    <use href="#ray" transform="rotate(225)"/>
+    <use href="#ray" transform="rotate(270)"/>
+    <use href="#ray" transform="rotate(315)"/>
+
+    <!-- Person with headphones - PROPER PROPORTIONS from reference -->
+    <g id="person" transform="scale(0.6) translate(0, 3)">
+      <!-- Head - Egg shape with squared middle -->
+      <path d="
+        M 0,-11
+        C 4.4,-11 8,-8 8,-4
+        L 8,4
+        C 8,8 4.4,11 0,11
+        C -4.4,11 -8,8 -8,4
+        L -8,-4
+        C -8,-8 -4.4,-11 0,-11
+        Z" fill="#2d2d2d"/>
+
+      <!-- Left ear cup - WITH SPACE from head -->
+      <rect x="-14" y="-3.5" width="5" height="7" rx="1.5" fill="#2d2d2d"/>
+
+      <!-- Right ear cup - WITH SPACE from head -->
+      <rect x="9" y="-3.5" width="5" height="7" rx="1.5" fill="#2d2d2d"/>
+
+      <!-- Headband - simple half circle -->
+      <path d="M -11.5,-3 A 11.5 11.5 0 0 1 11.5,-3" fill="none" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Text: INTURIOUS -->
+  <text
+    x="64"
+    y="105"
+    font-family="Arial, sans-serif"
+    font-size="14"
+    font-weight="700"
+    fill="#2d2d2d"
+    text-anchor="middle"
+    letter-spacing="2">
+    INTURIOUS
+  </text>
+</svg>

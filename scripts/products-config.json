@@ -58,6 +58,24 @@
       "name": "ic123",
       "slogan": "Internet Computer developer resources in Chinese",
       "color": "vanilla"
+    },
+    {
+      "slug": "rapport",
+      "name": "Rapport",
+      "slogan": "a light-weight comments plugin to drive hassle-free engagement with your readers",
+      "color": "sky"
+    },
+    {
+      "slug": "lumen",
+      "name": "Lumen",
+      "slogan": "make photo sharing great again",
+      "color": "peach"
+    },
+    {
+      "slug": "flux",
+      "name": "Flux",
+      "slogan": "a prolific content creator's mission-control room for writing multiple publications simultaneously",
+      "color": "mint"
     }
   ]
 }

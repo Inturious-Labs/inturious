@@ -164,7 +164,7 @@ class HeroImageGenerator:
 
         slogan_y = int(height * 0.6)
         draw.text((width // 2, slogan_y), wrapped_slogan,
-                 font=slogan_font, fill=text_color, anchor="mm", align="center")
+                 font=slogan_font, fill=text_color, anchor="mm", align="center", spacing=20)
 
         # Save if output path provided
         if output_path:
@@ -272,7 +272,7 @@ class HeroImageGenerator:
         wrapped_tagline = textwrap.fill(tagline, width=60)
         tagline_y = int(height * 0.65)
         draw.text((width // 2, tagline_y), wrapped_tagline,
-                 font=tagline_font, fill=text_color, anchor="mm", align="center")
+                 font=tagline_font, fill=text_color, anchor="mm", align="center", spacing=20)
 
         # Save if output path provided
         if output_path:
