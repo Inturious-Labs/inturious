@@ -6,31 +6,5 @@
   {
     "match": "products/_template/**",
     "ignore": true
-  },
-  {
-    "match": "**/*",
-    "headers": {
-      "X-Content-Type-Options": "nosniff"
-    },
-    "security_policy": "standard"
-  },
-  {
-    "match": "*.html",
-    "headers": {
-      "Content-Type": "text/html"
-    }
-  },
-  {
-    "match": "*.css",
-    "headers": {
-      "Content-Type": "text/css"
-    }
-  },
-  {
-    "match": "*.js",
-    "headers": {
-      "Content-Type": "application/javascript",
-      "Cache-Control": "public, max-age=31536000, immutable"
-    }
   }
 ]
