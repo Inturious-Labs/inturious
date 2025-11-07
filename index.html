@@ -33,11 +33,17 @@
   <link rel="icon" type="image/png" sizes="192x192" href="img/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="img/android-chrome-512x512.png">
 
+  <!-- DNS Prefetch & Preconnect for external resources -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+
   <link rel="stylesheet" href="css/pico.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Google Analytics -->
-  <script src="scripts/analytics.js"></script>
+  <script src="scripts/analytics.js" defer></script>
 </head>
 <body>
   <main class="container">
@@ -48,7 +54,7 @@
     </div>
 
     <div class="hero-image-section">
-      <img src="img/vibe-coding-man.jpg" alt="Vibe Coding Creator" class="hero-image">
+      <img src="img/vibe-coding-man.jpg" alt="Vibe Coding Creator" class="hero-image" loading="lazy">
       <div class="hero-overlay">
         <p class="hero-quote">"The first billion-dollar company run by a single employee could emerge in 2026"</p>
         <p class="hero-attribution">— Dario Amodei, Anthropic founder, May 2025</p>

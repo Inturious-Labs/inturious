@@ -19,11 +19,18 @@
   <meta name="twitter:description" content="The digital garden of Herbert Yang">
   <meta name="twitter:image" content="https://inturious.com/img/products/herbert-yang-blog-social-preview.jpg">
 
+  <!-- DNS Prefetch & Preconnect for external resources -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+
+
   <link rel="stylesheet" href="../../css/pico.min.css">
   <link rel="stylesheet" href="../../css/style.css">
 
   <!-- Google Analytics -->
-  <script src="../../scripts/analytics.js"></script>
+  <script src="../../scripts/analytics.js" defer></script>
 
   <!-- Product Color -->
   <style>
@@ -40,7 +47,7 @@
 
     <!-- Hero Image Section -->
     <div class="hero-image-section">
-      <img src="../../img/products/herbert-yang-blog-hero.jpg" alt="Herbert Yang" class="hero-image">
+      <img src="../../img/products/herbert-yang-blog-hero.jpg" alt="Herbert Yang" class="hero-image" loading="lazy">
       <span class="status-badge live">Live</span>
       <!-- Optional: Add overlay with quote -->
       <!--

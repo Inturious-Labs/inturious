@@ -19,11 +19,18 @@
   <meta name="twitter:description" content="a prolific content creator's mission-control room for writing multiple publications simultaneously">
   <meta name="twitter:image" content="https://inturious.com/img/products/flux-social-preview.jpg">
 
+  <!-- DNS Prefetch & Preconnect for external resources -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+
+
   <link rel="stylesheet" href="../../css/pico.min.css">
   <link rel="stylesheet" href="../../css/style.css">
 
   <!-- Google Analytics -->
-  <script src="../../scripts/analytics.js"></script>
+  <script src="../../scripts/analytics.js" defer></script>
 
   <!-- Product Color - Choose from: blue, pink, lavender, mint, peach, lilac, sky, coral, sage, lemon, rose, periwinkle, aqua, apricot, mauve, pistachio, powder, seafoam, vanilla, blush -->
   <style>
@@ -40,7 +47,7 @@
 
     <!-- Hero Image Section -->
     <div class="hero-image-section">
-      <img src="../../img/products/flux-hero.jpg" alt="Flux" class="hero-image">
+      <img src="../../img/products/flux-hero.jpg" alt="Flux" class="hero-image" loading="lazy">
       <span class="status-badge live">Live</span>
       <!-- Optional: Add overlay with quote -->
       <!--
