@@ -1,5 +1,7 @@
 # Inturious Labs
 
+[![Deploy to IC Mainnet](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml/badge.svg)](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml)
+
 Portfolio website for Inturious Labs showcasing digital products and services.
 
 ## Deployment
