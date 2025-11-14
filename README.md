@@ -1,31 +1,20 @@
 # Inturious Labs
 
+[![Deploy to IC Mainnet](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml/badge.svg)](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml)
+
 Portfolio website for Inturious Labs showcasing digital products and services.
 
 ## Deployment
 
-### IC Canister Information
+### Live Site
 
-**Canister ID:** `mhlja-5qaaa-aaaao-qkv2q-cai`
+- **Website:** https://inturious.com
+- **Canister ID:** `mhlja-5qaaa-aaaao-qkv2q-cai`
+- **IC URL:** https://mhlja-5qaaa-aaaao-qkv2q-cai.icp0.io
 
-**Creation Details:**
-- Created: 2025-10-30
-- Initial cycles: 500B (0.5 TC)
-- Total ICP converted: 0.5 ICP → ~1.12 TC
-- Identity: `inturious`
-- Principal: `v6g3i-2xwvh-ufwgr-tqjrh-46mu5-33qqy-qielq-fomlh-m2uab-yks7v-iae`
+### Deployment
 
-**Live URLs:**
-- IC URL: https://mhlja-5qaaa-aaaao-qkv2q-cai.icp0.io
-- Custom Domain: https://inturious.com (pending DNS configuration)
-
-### Deployment Process
-
-The site is automatically deployed to IC mainnet via GitHub Actions on push to `main` branch.
-
-**Requirements:**
-- GitHub Secret: `DFX_IDENTITY_INTURIOUS` (PEM file)
-- GitHub Variable: `PRODUCTION_CANISTER_ID` (mhlja-5qaaa-aaaao-qkv2q-cai)
+The site is automatically deployed to Internet Computer mainnet via GitHub Actions on every push to `main` branch.
 
 ### Local Development
 
@@ -40,10 +29,6 @@ python3 -m http.server 8000
 ### Manual Deployment
 
 ```bash
-# Use inturious identity
-dfx identity use inturious
-
-# Deploy to IC mainnet
 dfx deploy --network ic
 ```
 
@@ -51,23 +36,37 @@ dfx deploy --network ic
 
 ```
 inturious/
-├── index.html              # Main landing page
-├── products/
-│   ├── _template/          # Product page template (not deployed)
-│   │   └── index.html
-│   ├── readly/
-│   │   └── index.html     # Readly product page
-│   └── ...                 # Other product pages
+├── index.html                      # Main landing page
+├── robots.txt                      # SEO crawler configuration
+├── products/                       # Product pages
+│   ├── _template/                  # Product page template (excluded from deployment)
+│   ├── digital-sovereignty-chronicle/
+│   ├── the-sunday-blender/
+│   ├── herbert-yang-blog/
+│   ├── ic123/
+│   ├── rapport/
+│   ├── lumen/
+│   ├── flux/
+│   └── readly/
 ├── css/
-│   ├── pico.min.css       # CSS framework
-│   └── style.css          # Custom styles
+│   ├── pico.min.css               # Pico CSS framework
+│   └── style.css                  # Custom styles
+├── img/
+│   ├── products/                  # Product hero and social preview images
+│   ├── favicon.*                  # Favicon files
+│   └── *.jpg                      # Site images
 ├── scripts/
-│   └── analytics.js       # Google Analytics
+│   ├── analytics.js               # Google Analytics
+│   ├── generate_hero_images.py    # Hero image generator
+│   ├── products-config.json       # Product configuration
+│   └── README.md                  # Scripts documentation
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml     # CI/CD deployment
-├── dfx.json               # IC canister configuration
-└── .ic-assets.json5       # Content-type headers
+│       └── deploy.yml             # CI/CD to Internet Computer
+├── .well-known/
+│   └── ic-domains                 # Custom domain configuration
+├── dfx.json                       # IC canister configuration
+└── .ic-assets.json5               # Asset headers and caching
 ```
 
 ## Adding a New Product
