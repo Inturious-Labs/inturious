@@ -36,23 +36,37 @@ dfx deploy --network ic
 
 ```
 inturious/
-├── index.html              # Main landing page
-├── products/
-│   ├── _template/          # Product page template (not deployed)
-│   │   └── index.html
-│   ├── readly/
-│   │   └── index.html     # Readly product page
-│   └── ...                 # Other product pages
+├── index.html                      # Main landing page
+├── robots.txt                      # SEO crawler configuration
+├── products/                       # Product pages
+│   ├── _template/                  # Product page template (excluded from deployment)
+│   ├── digital-sovereignty-chronicle/
+│   ├── the-sunday-blender/
+│   ├── herbert-yang-blog/
+│   ├── ic123/
+│   ├── rapport/
+│   ├── lumen/
+│   ├── flux/
+│   └── readly/
 ├── css/
-│   ├── pico.min.css       # CSS framework
-│   └── style.css          # Custom styles
+│   ├── pico.min.css               # Pico CSS framework
+│   └── style.css                  # Custom styles
+├── img/
+│   ├── products/                  # Product hero and social preview images
+│   ├── favicon.*                  # Favicon files
+│   └── *.jpg                      # Site images
 ├── scripts/
-│   └── analytics.js       # Google Analytics
+│   ├── analytics.js               # Google Analytics
+│   ├── generate_hero_images.py    # Hero image generator
+│   ├── products-config.json       # Product configuration
+│   └── README.md                  # Scripts documentation
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml     # CI/CD deployment
-├── dfx.json               # IC canister configuration
-└── .ic-assets.json5       # Content-type headers
+│       └── deploy.yml             # CI/CD to Internet Computer
+├── .well-known/
+│   └── ic-domains                 # Custom domain configuration
+├── dfx.json                       # IC canister configuration
+└── .ic-assets.json5               # Asset headers and caching
 ```
 
 ## Adding a New Product
