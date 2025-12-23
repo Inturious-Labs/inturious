@@ -4,7 +4,7 @@
     "ignore": false
   },
   {
-    "match": "products/_template/**",
+    "match": "products/project-deck/**",
     "ignore": true
   },
   {
