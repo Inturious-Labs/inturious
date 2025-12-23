@@ -2,11 +2,13 @@
 
 This folder contains a [sli.dev](https://sli.dev) presentation template for product pitch decks.
 
+**Live template:** https://inturious.com/products/project-deck/pitch/
+
 ## Creating a New Deck
 
 1. Copy this entire `deck/` folder into your product directory:
    ```bash
-   cp -r products/_template/deck products/my-product/deck
+   cp -r products/project-deck/deck products/my-product/deck
    ```
 
 2. Edit `slides.md` with your content
