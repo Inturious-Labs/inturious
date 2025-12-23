@@ -41,5 +41,6 @@ temp/
 *.tmp
 scripts/__pycache__/
 
-# Pitch decks - built output (generated from deck/ source in CI)
+# Pitch decks - built output and lock files (generated in CI)
 products/*/pitch/
+products/*/deck/package-lock.json
