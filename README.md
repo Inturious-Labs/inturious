@@ -39,7 +39,7 @@ inturious/
 ├── index.html                      # Main landing page
 ├── robots.txt                      # SEO crawler configuration
 ├── products/                       # Product pages
-│   ├── _template/                  # Product page template (excluded from deployment)
+│   ├── project-deck/               # Pitch deck template
 │   ├── digital-sovereignty-chronicle/
 │   ├── the-sunday-blender/
 │   ├── herbert-yang-blog/
@@ -104,7 +104,7 @@ This will create:
 
 ```bash
 mkdir -p products/product-slug
-cp products/_template/index.html products/product-slug/index.html
+cp products/project-deck/deck/slides.md products/product-slug/deck/slides.md
 ```
 
 ### Step 4: Customize Product Page Basics
@@ -179,9 +179,9 @@ The site will automatically deploy to IC mainnet via GitHub Actions.
 - **Product page:** `products/product-slug/index.html`
 - **Hero images:** `img/products/product-slug-hero.jpg` and `product-slug-social-preview.jpg`
 - **Homepage:** `index.html` (products-grid section)
-- **Template:** `products/_template/index.html`
+- **Template:** `products/project-deck/deck/slides.md`
 
-Note: The `products/_template/` directory is excluded from deployment via `.ic-assets.json5`.
+Note: The `products/project-deck/` directory contains the pitch deck template.
 
 ## Contact
 
