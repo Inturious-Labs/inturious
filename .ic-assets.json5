@@ -6,5 +6,9 @@
   {
     "match": "products/_template/**",
     "ignore": true
+  },
+  {
+    "match": "products/*/deck/**",
+    "ignore": true
   }
 ]

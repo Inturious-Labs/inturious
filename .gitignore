@@ -40,3 +40,6 @@ tmp/
 temp/
 *.tmp
 scripts/__pycache__/
+
+# Pitch decks - built output (generated from deck/ source in CI)
+products/*/pitch/
