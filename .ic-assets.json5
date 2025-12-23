@@ -4,10 +4,6 @@
     "ignore": false
   },
   {
-    "match": "products/project-deck/**",
-    "ignore": true
-  },
-  {
     "match": "products/*/deck/**",
     "ignore": true
   }

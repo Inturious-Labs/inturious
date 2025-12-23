@@ -21,12 +21,6 @@ for product_dir in "$PRODUCTS_DIR"/*/; do
   product_name=$(basename "$product_dir")
   deck_dir="$product_dir/deck"
 
-  # Skip _template
-  if [ "$product_name" = "_template" ]; then
-    echo "⏭️  Skipping _template"
-    continue
-  fi
-
   # Check if deck folder exists
   if [ ! -d "$deck_dir" ]; then
     echo "⏭️  $product_name: no deck/ folder, skipping"
