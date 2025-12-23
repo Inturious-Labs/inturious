@@ -3,7 +3,7 @@ theme: default
 title: "[Product Name]"
 info: |
   ## [Product Name]
-  Pitch deck for [Product Name] by Inturious Labs
+  Pitch deck for [Product Name] by [Your Company]
 layout: cover
 background: https://cover.sli.dev
 class: text-center
@@ -18,8 +18,8 @@ mdc: true
 [One-line value proposition - what you do in one sentence]
 
 <div class="abs-br m-6 flex gap-2">
-  <a href="https://inturious.com" target="_blank" class="text-sm opacity-50 hover:opacity-100">
-    Inturious Labs
+  <a href="https://your-domain.com" target="_blank" class="text-sm opacity-50 hover:opacity-100">
+    [Your Company]
   </a>
 </div>
 
@@ -435,7 +435,7 @@ Seed round to achieve [specific milestone]
 </div>
 
 <div class="abs-br m-6 text-sm opacity-50">
-  © 2025 Inturious Labs
+  © 2026 [Your Company]
 </div>
 
 ---

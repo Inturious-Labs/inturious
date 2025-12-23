@@ -20,7 +20,7 @@ This folder contains a [sli.dev](https://sli.dev) presentation template for prod
    Opens at `http://localhost:3030`
 
 4. Commit your changes. The CI pipeline will automatically build and deploy to:
-   `https://inturious.com/products/my-product/pitch/`
+   `https://your-domain.com/products/my-product/pitch/`
 
 ## Files
 
