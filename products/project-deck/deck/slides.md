@@ -46,6 +46,49 @@ Airbnb example:
 
 ---
 
+# Target Users
+
+<!-- Tip: Define your ideal customer. Be specific about who you serve. -->
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div>
+
+### Primary Users
+
+<v-clicks>
+
+- **[User Persona 1]** - [Job title / role]
+  - Pain: [Their main problem]
+  - Need: [What they're looking for]
+
+- **[User Persona 2]** - [Job title / role]
+  - Pain: [Their main problem]
+  - Need: [What they're looking for]
+
+</v-clicks>
+
+</div>
+
+<div>
+
+### User Profile
+
+<v-clicks>
+
+- **Demographics:** [Age, location, industry]
+- **Company size:** [SMB / Mid-market / Enterprise]
+- **Budget:** [Typical spending power]
+- **Decision maker:** [Who signs off]
+
+</v-clicks>
+
+</div>
+
+</div>
+
+---
+
 # The Solution
 
 <!-- Tip: One sentence that explains what you do. Keep it simple. -->
