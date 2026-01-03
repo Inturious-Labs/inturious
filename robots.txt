@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap not needed - all pages linked from homepage
+Sitemap: https://inturious.com/sitemap.xml
