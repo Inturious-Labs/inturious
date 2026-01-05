@@ -6,16 +6,16 @@ This folder contains a [sli.dev](https://sli.dev) presentation template for prod
 
 ## Creating a New Deck
 
-1. Copy this entire `deck/` folder into your product directory:
+1. Copy this entire `slides-src/` folder into your product directory:
    ```bash
-   cp -r products/project-deck/deck products/my-product/deck
+   cp -r products/project-deck/slides-src products/my-product/slides-src
    ```
 
 2. Edit `slides.md` with your content
 
 3. Test locally:
    ```bash
-   cd products/my-product/deck
+   cd products/my-product/slides-src
    npm install
    npm run dev
    ```
