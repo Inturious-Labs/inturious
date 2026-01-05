@@ -1,8 +1,8 @@
-# Pitch Deck Template (sli.dev)
+# Deck Template (sli.dev)
 
-This folder contains a [sli.dev](https://sli.dev) presentation template for product pitch decks.
+This folder contains a [sli.dev](https://sli.dev) presentation template for product decks.
 
-**Live template:** https://inturious.com/products/project-deck/pitch/
+**Live template:** https://inturious.com/products/project-deck/deck/
 
 ## Creating a New Deck
 
@@ -22,7 +22,7 @@ This folder contains a [sli.dev](https://sli.dev) presentation template for prod
    Opens at `http://localhost:3030`
 
 4. Commit your changes. The CI pipeline will automatically build and deploy to:
-   `https://your-domain.com/products/my-product/pitch/`
+   `https://inturious.com/products/my-product/deck/`
 
 ## Files
 

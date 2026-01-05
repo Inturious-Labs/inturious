@@ -41,9 +41,9 @@ for product_dir in "$PRODUCTS_DIR"/*/; do
   (cd "$deck_dir" && npm install --silent)
 
   # Build with correct base path
-  BASE_PATH="/products/$product_name/pitch/"
+  BASE_PATH="/products/$product_name/deck/"
   echo "   Building with base: $BASE_PATH"
-  (cd "$deck_dir" && npx slidev build --base "$BASE_PATH" --out ../pitch)
+  (cd "$deck_dir" && npx slidev build --base "$BASE_PATH" --out ../deck-dist)
 
   echo "✅ $product_name deck built successfully"
   DECKS_BUILT=$((DECKS_BUILT + 1))
