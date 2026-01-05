@@ -1,0 +1,7 @@
+{
+  "name": "inturious",
+  "private": true,
+  "scripts": {
+    "build:decks": "./scripts/build-decks.sh"
+  }
+}
