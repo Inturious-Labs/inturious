@@ -28,7 +28,7 @@ jobs:
           node-version: '20'
 
       - name: Build pitch decks
-        run: ./scripts/build-decks.sh
+        run: ./scripts/build-decks.sh ${{ github.event.before || 'HEAD~1' }}
 
       - name: Generate sitemap
         run: python3 scripts/generate_sitemap.py
