@@ -63,14 +63,10 @@ for product_dir in "$PRODUCTS_DIR"/*/; do
   echo ""
   echo "📦 Building deck for: $product_name"
 
-  # Install dependencies
-  echo "   Installing dependencies..."
-  (cd "$slides_dir" && npm install --silent)
-
-  # Build with correct base path
+  # Build with correct base path (dependencies installed via pnpm at root)
   BASE_PATH="/products/$product_name/deck/"
   echo "   Building with base: $BASE_PATH"
-  (cd "$slides_dir" && npx slidev build --base "$BASE_PATH" --out ../deck)
+  (cd "$slides_dir" && pnpm exec slidev build --base "$BASE_PATH" --out ../deck)
 
   echo "✅ $product_name deck built successfully"
   DECKS_BUILT=$((DECKS_BUILT + 1))

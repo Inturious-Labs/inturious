@@ -1,0 +1,8 @@
+{
+  "name": "inturious",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Build handled by workflow'",
+    "build:decks": "./scripts/build-decks.sh"
+  }
+}
