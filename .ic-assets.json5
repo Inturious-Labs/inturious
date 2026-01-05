@@ -4,7 +4,7 @@
     "ignore": false
   },
   {
-    "match": "products/*/deck/**",
+    "match": "products/*/slides-src/**",
     "ignore": true
   }
 ]
