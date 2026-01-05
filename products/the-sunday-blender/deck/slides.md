@@ -1,9 +1,9 @@
 ---
 theme: default
-title: "[Product Name]"
+title: "内容创建者如何在 2026 使用 AI"
 info: |
-  ## [Product Name]
-  Pitch deck for [Product Name] by [Your Company]
+  ## 内容创建者如何在 2026 使用 AI
+  用 Claude 实现内容编辑和出版的高度自动化
 layout: cover
 background: https://cover.sli.dev
 class: text-center
