@@ -32,7 +32,7 @@ python3 -m http.server 8000
 dfx deploy --network ic
 ```
 
-## Project Structure
+## Portfolio Structure
 
 ```
 inturious/
@@ -47,6 +47,7 @@ inturious/
 │   ├── rapport/
 │   ├── lumen/
 │   ├── flux/
+│   ├── y3-labs/                    # Y3 Labs game studio
 │   └── readly/
 ├── css/
 │   ├── pico.min.css               # Pico CSS framework
@@ -180,8 +181,7 @@ The site will automatically deploy to IC mainnet via GitHub Actions.
 - **Hero images:** `img/products/product-slug-hero.jpg` and `product-slug-social-preview.jpg`
 - **Homepage:** `index.html` (products-grid section)
 - **Template:** `products/project-deck/deck/slides.md`
-
-Note: The `products/project-deck/` directory contains the pitch deck template.
+- **Pitch deck:** https://inturious.com/products/project-deck/deck/
 
 ## Contact
 
