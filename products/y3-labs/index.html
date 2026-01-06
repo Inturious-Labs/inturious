@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Y3 Labs - Pacboy 2025 and more exciting games created by 9-year-old game designer Brandonator. Experience the ultimate maze adventure!">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Y3 Labs">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FFD700">
+    <meta name="msapplication-TileColor" content="#FFD700">
+    <meta name="msapplication-config" content="none">
+    <link rel="manifest" href="manifest.json">
+    <meta property="og:title" content="Y3 Labs - Pacboy 2025">
+    <meta property="og:description" content="Pacboy 2025 and more exciting games created by 9-year-old game designer Brandonator. Experience the ultimate maze adventure!">
+    <meta property="og:image" content="img/brandonator.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Y3 Labs - Pacboy 2025">
+    <meta name="twitter:description" content="Pacboy 2025 and more exciting games created by 9-year-old game designer Brandonator. Experience the ultimate maze adventure!">
+    <meta name="twitter:image" content="img/brandonator.jpg">
+    <meta name="twitter:image:alt" content="Y3 Labs - Pacboy 2025">
+    <link rel="icon" type="image/png" href="img/Y3labs.png">
+    <link rel="apple-touch-icon" href="img/Y3labs.png">
+    <title>Y3 Labs</title>
+
+    <link rel="stylesheet" href="../../css/pico.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: white;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .developer-info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .game-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .game-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+
+        .game-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .play-button {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .coming-soon {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .coming-soon h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer p {
+            text-align: center !important;
+            margin: 0 auto !important;
+            display: block !important;
+            width: 100% !important;
+            justify-content: center !important;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #FFD700;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+        .pacman-preview {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pacboy {
+            position: absolute;
+            font-size: 40px;
+            animation: pacboy-chomp 0.5s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pacboy-chomp {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .ghost {
+            position: absolute;
+            font-size: 30px;
+            animation: ghost-float 3s infinite ease-in-out;
+        }
+
+        .ghost:nth-child(1) {
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .ghost:nth-child(2) {
+            left: 40%;
+            animation-delay: 0.5s;
+        }
+
+        .ghost:nth-child(3) {
+            left: 60%;
+            animation-delay: 1s;
+        }
+
+        .ghost:nth-child(4) {
+            left: 80%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes ghost-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-40px); }
+        }
+
+        .ghost-red {
+            color: #FF5A36;
+        }
+        .ghost-cyan {
+            color: #00FFFF;
+        }
+        .ghost-pink {
+            color: #FFB8FF;
+        }
+        .ghost-yellow {
+            color: #FFD700;
+        }
+
+        /* PWA Installation Styles */
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pwa-install-prompt.show {
+            display: block;
+        }
+
+        .pwa-install-prompt button {
+            background: #FFD700;
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .pwa-install-prompt .close {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        @supports (padding: max(0px)) {
+            .pwa-install-prompt {
+                bottom: max(20px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="../../index.html" role="button" class="secondary outline">← Back Home</a>
+        </div>
+
+        <header>
+            <img src="img/brandonator.jpg" alt="Y3 Labs" style="width: 100%; height: auto; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <h1 class="logo">Y3 Labs</h1>
+            <p class="tagline">Where Fun Meets Imagination!</p>
+            
+            <div class="developer-info">
+                <h3>👨‍💻 Meet the Developer</h3>
+                <p>Hi! I'm Brandonator, a 9-year-old game designer who loves creating fun games for everyone to enjoy!</p>
+            </div>
+        </header>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="pacman-preview" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 80px;">
+                        <svg class="pacboy" width="48" height="48" viewBox="0 0 40 40">
+                            <circle cx="20" cy="20" r="18" fill="yellow" />
+                            <path d="M20,20 L38,10 A18,18 0 1,1 38,30 Z" fill="black" />
+                        </svg>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 90%; margin-top: 18px;">
+                        <svg class="ghost ghost-red" width="48" height="48" viewBox="0 0 40 40">
+                            <ellipse cx="20" cy="22" rx="16" ry="14" fill="#FF5A36" />
+                            <rect x="4" y="22" width="32" height="10" fill="#FF5A36" />
+                            <circle cx="14" cy="22" r="4" fill="white" />
+                            <circle cx="26" cy="22" r="4" fill="white" />
+                            <circle cx="14" cy="22" r="2" fill="#333" />
+                            <circle cx="26" cy="22" r="2" fill="#333" />
+                        </svg>
+                        <svg class="ghost ghost-cyan" width="48" height="48" viewBox="0 0 40 40">
+                            <ellipse cx="20" cy="22" rx="16" ry="14" fill="#00FFFF" />
+                            <rect x="4" y="22" width="32" height="10" fill="#00FFFF" />
+                            <circle cx="14" cy="22" r="4" fill="white" />
+                            <circle cx="26" cy="22" r="4" fill="white" />
+                            <circle cx="14" cy="22" r="2" fill="#333" />
+                            <circle cx="26" cy="22" r="2" fill="#333" />
+                        </svg>
+                        <svg class="ghost ghost-pink" width="48" height="48" viewBox="0 0 40 40">
+                            <ellipse cx="20" cy="22" rx="16" ry="14" fill="#FFB8FF" />
+                            <rect x="4" y="22" width="32" height="10" fill="#FFB8FF" />
+                            <circle cx="14" cy="22" r="4" fill="white" />
+                            <circle cx="26" cy="22" r="4" fill="white" />
+                            <circle cx="14" cy="22" r="2" fill="#333" />
+                            <circle cx="26" cy="22" r="2" fill="#333" />
+                        </svg>
+                        <svg class="ghost ghost-yellow" width="48" height="48" viewBox="0 0 40 40">
+                            <ellipse cx="20" cy="22" rx="16" ry="14" fill="#FFD700" />
+                            <rect x="4" y="22" width="32" height="10" fill="#FFD700" />
+                            <circle cx="14" cy="22" r="4" fill="white" />
+                            <circle cx="26" cy="22" r="4" fill="white" />
+                            <circle cx="14" cy="22" r="2" fill="#333" />
+                            <circle cx="26" cy="22" r="2" fill="#333" />
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="game-title">Pacboy 2025</h2>
+                <p class="game-description">
+                    Navigate through randomly generated mazes, collect golden pellets, and avoid the colorful ghosts! 
+                    Each game is unique with a new maze layout. Optimized for portrait mode on mobile phones with touch controls.
+                </p>
+                <a href="https://viiha-gqaaa-aaaae-qfe4q-cai.icp0.io/games/pacboy-2025/" class="play-button" target="_blank" rel="noopener noreferrer">🎮 Play Now!</a>
+            </div>
+
+
+        </div>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <div style="text-align: center; color: white;">
+                        <div style="font-size: 48px; margin-bottom: 10px;">🚀</div>
+                        <div style="font-size: 24px; font-weight: bold;">Coming Soon</div>
+                    </div>
+                </div>
+                <h2 class="game-title">More Games</h2>
+                <p class="game-description">
+                    Stay tuned for more exciting adventures from Y3 Labs! We're working on new games that will push the boundaries of fun and imagination.
+                </p>
+                <button class="play-button" style="background: rgba(255,255,255,0.2); color: white; cursor: default;" disabled>Coming Soon</button>
+            </div>
+        </div>
+
+        <footer style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 80px;">
+            <p style="margin: 0; text-align: center; color: #cccccc;">&copy; 2026 Y3 Labs</p>
+            <div style="margin-top: 15px; text-align: center;">
+                <a href="https://github.com/Inturious-Labs/Y3-Labs" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <p style="margin: 0; text-align: center; color: #cccccc; font-size: 12px;">Powered by</p>
+                <img src="img/internet-computer-logo.png" alt="Internet Computer" style="height: 20px; margin-top: 8px;">
+            </div>
+        </footer>
+    </div>
+
+    <!-- PWA Installation Prompt -->
+    <div class="pwa-install-prompt" id="pwaInstallPrompt">
+        <span>Install Y3 Labs for the best experience!</span>
+        <button id="installButton">Install</button>
+        <button class="close" id="closeInstallPrompt">×</button>
+    </div>
+
+    <script>
+        // PWA Installation Logic
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install prompt after a delay
+            setTimeout(() => {
+                const prompt = document.getElementById('pwaInstallPrompt');
+                if (prompt && !localStorage.getItem('pwaInstallDismissed')) {
+                    prompt.classList.add('show');
+                }
+            }, 3000);
+        });
+
+        document.getElementById('installButton')?.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('PWA installed successfully');
+                }
+                deferredPrompt = null;
+                document.getElementById('pwaInstallPrompt').classList.remove('show');
+            }
+        });
+
+        document.getElementById('closeInstallPrompt')?.addEventListener('click', () => {
+            document.getElementById('pwaInstallPrompt').classList.remove('show');
+            localStorage.setItem('pwaInstallDismissed', 'true');
+        });
+
+
+
+        // Handle iOS PWA specific behaviors
+        if (window.navigator.standalone) {
+            // App is running in standalone mode (installed)
+            document.body.classList.add('standalone');
+        }
+
+        // iOS Safari bottom bar hiding technique
+        function hideBottomBar() {
+            // Force scroll to trigger UI hiding
+            window.scrollTo(0, 1);
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 100);
+        }
+
+        // Hide bottom bar on page load
+        window.addEventListener('load', hideBottomBar);
+        
+        // Hide bottom bar on orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(hideBottomBar, 500);
+        });
+
+        // Hide bottom bar on focus (when returning to app)
+        window.addEventListener('focus', hideBottomBar);
+
+        // Prevent zoom on double tap (iOS)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html> 
