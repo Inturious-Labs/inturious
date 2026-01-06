@@ -68,6 +68,15 @@ for product_dir in "$PRODUCTS_DIR"/*/; do
   echo "   Building with base: $BASE_PATH"
   (cd "$slides_dir" && pnpm exec slidev build --base "$BASE_PATH" --out ../deck)
 
+  # Inject Google Analytics into the built deck
+  DECK_INDEX="$deck_dir/index.html"
+  if [ -f "$DECK_INDEX" ]; then
+    echo "   Injecting Google Analytics..."
+    # Insert analytics script right before </head>
+    sed -i.bak 's|</head>|<script src="/scripts/analytics.js" defer></script>\n</head>|' "$DECK_INDEX"
+    rm -f "$DECK_INDEX.bak"
+  fi
+
   echo "✅ $product_name deck built successfully"
   DECKS_BUILT=$((DECKS_BUILT + 1))
 done
