@@ -4,6 +4,7 @@ title: "内容创建者如何在 2026 使用 AI"
 info: |
   ## 内容创建者如何在 2026 使用 AI
   用 Claude 实现内容编辑和出版的高度自动化
+  Inturious Labs 2026
 layout: cover
 background: https://cover.sli.dev
 class: text-center
