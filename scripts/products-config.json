@@ -76,6 +76,12 @@
       "name": "Flux",
       "slogan": "a prolific content creator's mission-control room for writing multiple publications simultaneously",
       "color": "mint"
+    },
+    {
+      "slug": "y3-labs",
+      "name": "Y3 Labs",
+      "slogan": "The attack from the world's youngest vibe coder",
+      "color": "pink"
     }
   ]
 }
