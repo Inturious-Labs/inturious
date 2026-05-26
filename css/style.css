@@ -391,20 +391,6 @@ footer small {
   transform: translateY(-2px);
 }
 
-/* IC Logo in footer */
-.powered-by {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ic-logo {
-  height: 20px;
-  width: auto;
-  vertical-align: middle;
-  margin-left: 0.25rem;
-}
-
 /* Talks & Decks Section */
 .talks {
   margin-top: 2rem;

@@ -20,20 +20,17 @@ python3 -m http.server 8000
 # visit http://localhost:8000/
 ```
 
-### IC Canister (legacy, retained for rollback)
-
-The site was previously deployed to the Internet Computer mainnet (canister `mhlja-5qaaa-aaaao-qkv2q-cai`, IC URL https://mhlja-5qaaa-aaaao-qkv2q-cai.icp0.io). The dfx config, canister IDs, and `.ic-assets.json5` remain in the repo as a fallback. To deploy to IC manually: `dfx deploy --network ic`.
-
 ## Portfolio Structure
 
 ```
 inturious/
 ├── index.html                      # Main landing page
 ├── robots.txt                      # SEO crawler configuration
+├── vercel.json                     # Vercel build & deploy config
 ├── decks/                          # Slidev decks (talks, pitches)
 │   ├── _template/                  # Starter template (not deployed)
 │   └── <deck-slug>/                # One folder per deck
-│       └── src/                    # Slidev source (slides.md, package.json, public/)
+│       └── src/                    # Slidev source (slides.md, public/)
 ├── products/                       # Product pages
 │   ├── digital-sovereignty-chronicle/
 │   ├── the-sunday-blender/
@@ -51,18 +48,13 @@ inturious/
 │   ├── products/                  # Product hero and social preview images
 │   ├── favicon.*                  # Favicon files
 │   └── *.jpg                      # Site images
-├── scripts/
-│   ├── analytics.js               # Google Analytics
-│   ├── generate_hero_images.py    # Hero image generator
-│   ├── products-config.json       # Product configuration
-│   └── README.md                  # Scripts documentation
-├── .github/
-│   └── workflows/
-│       └── deploy.yml             # CI/CD to Internet Computer
-├── .well-known/
-│   └── ic-domains                 # Custom domain configuration
-├── dfx.json                       # IC canister configuration
-└── .ic-assets.json5               # Asset headers and caching
+└── scripts/
+    ├── analytics.js               # Google Analytics
+    ├── build-decks.sh             # Build all public decks
+    ├── generate_sitemap.py        # Auto-discover sitemap generator
+    ├── generate_hero_images.py    # Hero image generator
+    ├── products-config.json       # Product configuration
+    └── README.md                  # Scripts documentation
 ```
 
 ## Adding a New Product
@@ -166,7 +158,7 @@ git commit -m "Add [Product Name] product page"
 git push
 ```
 
-The site will automatically deploy to IC mainnet via GitHub Actions.
+Vercel will automatically build and deploy on push.
 
 ### Quick Reference
 
@@ -185,19 +177,18 @@ Decks are slidev presentations published under `inturious.com/decks/<slug>/`. Th
 
 ```bash
 mkdir -p decks/<deck-slug>/src
-cp decks/_template/src/{slides.md,package.json,.gitignore} decks/<deck-slug>/src/
+cp decks/_template/src/slides.md decks/<deck-slug>/src/slides.md
 ```
 
 ### Step 2: Edit `decks/<deck-slug>/src/slides.md`
 
 Update the title, frontmatter, and content. Drop any static assets into `decks/<deck-slug>/src/public/` — slidev serves them at the deck root.
 
-### Step 3: Preview locally
+### Step 3: Preview locally (from project root)
 
 ```bash
-cd decks/<deck-slug>/src
-pnpm install   # first time only
-pnpm dev       # opens http://localhost:3030
+pnpm install                                       # first time only
+pnpm slidev decks/<deck-slug>/src/slides.md        # opens http://localhost:3030
 ```
 
 ### Step 4: Commit and deploy
@@ -208,7 +199,9 @@ git commit -m "Add <deck-slug> deck"
 git push
 ```
 
-CI runs `scripts/build-decks.sh`, which builds each changed deck into `decks/<deck-slug>/` (alongside `src/`). The canister serves it at `https://inturious.com/decks/<deck-slug>/`. The `src/` folder and `_template/` are excluded from the canister upload via `.ic-assets.json5`.
+Vercel runs `scripts/build-decks.sh`, which builds each deck into `decks/<deck-slug>/` (alongside `src/`) and serves it at `https://inturious.com/decks/<deck-slug>/`. Drafts (folders prefixed with `_`) are skipped. The sitemap auto-discovers the new deck.
+
+See `decks/_template/src/README.md` for the full deck workflow.
 
 ## Contact
 
@@ -216,4 +209,4 @@ hello@inturious.com
 
 ## License
 
-Copyright 2025 Inturious Labs
+Copyright 2026 Inturious Labs
