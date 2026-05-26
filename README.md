@@ -1,7 +1,5 @@
 # Inturious Labs
 
-[![Deploy to IC Mainnet](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml/badge.svg)](https://github.com/Inturious-Labs/inturious/actions/workflows/deploy.yml)
-
 Portfolio website for Inturious Labs showcasing digital products and services.
 
 ## Deployment
@@ -9,28 +7,22 @@ Portfolio website for Inturious Labs showcasing digital products and services.
 ### Live Site
 
 - **Website:** https://inturious.com
-- **Canister ID:** `mhlja-5qaaa-aaaao-qkv2q-cai`
-- **IC URL:** https://mhlja-5qaaa-aaaao-qkv2q-cai.icp0.io
-
-### Deployment
-
-The site is automatically deployed to Internet Computer mainnet via GitHub Actions on every push to `main` branch.
+- **Hosting:** Vercel (via git integration — auto-deploys on push to `main`)
 
 ### Local Development
 
 ```bash
-# Open index.html in browser
-open index.html
+# Build decks first (only needed if you want to preview decks locally)
+./scripts/build-decks.sh
 
-# Or use a local server
+# Serve the static site
 python3 -m http.server 8000
+# visit http://localhost:8000/
 ```
 
-### Manual Deployment
+### IC Canister (legacy, retained for rollback)
 
-```bash
-dfx deploy --network ic
-```
+The site was previously deployed to the Internet Computer mainnet (canister `mhlja-5qaaa-aaaao-qkv2q-cai`, IC URL https://mhlja-5qaaa-aaaao-qkv2q-cai.icp0.io). The dfx config, canister IDs, and `.ic-assets.json5` remain in the repo as a fallback. To deploy to IC manually: `dfx deploy --network ic`.
 
 ## Portfolio Structure
 

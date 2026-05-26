@@ -4,6 +4,10 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@slidev/cli': ^51.0.0
+  '@slidev/theme-default': latest
+
 importers:
 
   .: {}
@@ -14,10 +18,10 @@ importers:
         specifier: ^51.0.0
         version: 51.8.2(@babel/parser@7.29.7)(@nuxt/kit@3.21.6)(@types/markdown-it@14.1.2)(@types/node@22.19.19)(@vue/compiler-sfc@3.5.34)(markdown-it-async@2.2.0)(postcss@8.5.15)
       '@slidev/theme-default':
-        specifier: ^0.25.0
+        specifier: latest
         version: 0.25.0
       '@slidev/theme-seriph':
-        specifier: ^0.25.0
+        specifier: latest
         version: 0.25.0
 
   decks/_template/src:
