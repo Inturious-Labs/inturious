@@ -1,5 +1,5 @@
 {
-  "name": "deck-template",
+  "name": "deck-one-person-publication-stack",
   "private": true,
   "scripts": {
     "dev": "slidev",
