@@ -370,6 +370,15 @@ footer small {
   font-size: 1rem;
 }
 
+footer small a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+footer small a:hover {
+  color: #ffffff;
+}
+
 /* Social Links */
 .social-links {
   margin-bottom: 1rem;
@@ -389,20 +398,6 @@ footer small {
 .social-links a:hover {
   color: #22d3ee;
   transform: translateY(-2px);
-}
-
-/* IC Logo in footer */
-.powered-by {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ic-logo {
-  height: 20px;
-  width: auto;
-  vertical-align: middle;
-  margin-left: 0.25rem;
 }
 
 /* Talks & Decks Section */
