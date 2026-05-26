@@ -3,13 +3,6 @@
 # which is what we want (no build = no leaked URL).
 decks/_*/
 
-# IC canister artifacts — kept in repo for rollback, not deployed to Vercel.
-.dfx/
-dfx.json
-canister_ids.json
-.ic-assets.json5
-.well-known/ic-domains
-
 # Repo metadata. Only root-level docs; markdown inside products/ or decks/
 # may be needed (slidev's slides.md), so don't use a broad *.md rule.
 /README.md
