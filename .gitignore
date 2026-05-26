@@ -41,9 +41,11 @@ temp/
 *.tmp
 scripts/__pycache__/
 
-# Pitch decks - built output (generated in CI)
-products/*/pitch/
-products/*/deck/
+# Decks - built output (generated in CI). Source lives in decks/<slug>/src/.
+decks/*/index.html
+decks/*/assets/
+decks/*/404.html
+decks/*/_redirects
 
 # Sitemap (generated in CI)
 sitemap.xml
