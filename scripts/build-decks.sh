@@ -70,7 +70,9 @@ for deck_dir in "$DECKS_DIR"/*/; do
 
   BASE_PATH="/decks/$deck_name/"
   echo "   Building with base: $BASE_PATH"
-  (cd "$src_dir" && pnpm exec slidev build --base "$BASE_PATH" --out ..)
+  # Per-deck install: root `pnpm install` doesn't always populate per-deck
+  # node_modules/.bin on Vercel, which breaks `pnpm exec slidev` below.
+  (cd "$src_dir" && pnpm install --prefer-offline && pnpm exec slidev build --base "$BASE_PATH" --out ..)
 
   # Inject Google Analytics into the built deck
   DECK_INDEX="$deck_dir/index.html"
