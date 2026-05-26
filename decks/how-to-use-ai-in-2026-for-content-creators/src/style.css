@@ -1,0 +1,10 @@
+/* Force-hide slidev's "goto" dialog. In slidev 51.8 it sometimes
+   gets stuck visible after triggering with `g`, and Esc doesn't
+   dismiss it. We don't use it, so hide it for good. */
+html body #slidev-goto-dialog,
+html body div#slidev-goto-dialog {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
