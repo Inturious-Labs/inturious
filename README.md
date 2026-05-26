@@ -38,8 +38,11 @@ dfx deploy --network ic
 inturious/
 ├── index.html                      # Main landing page
 ├── robots.txt                      # SEO crawler configuration
+├── decks/                          # Slidev decks (talks, pitches)
+│   ├── _template/                  # Starter template (not deployed)
+│   └── <deck-slug>/                # One folder per deck
+│       └── src/                    # Slidev source (slides.md, package.json, public/)
 ├── products/                       # Product pages
-│   ├── project-deck/               # Pitch deck template
 │   ├── digital-sovereignty-chronicle/
 │   ├── the-sunday-blender/
 │   ├── herbert-yang-blog/
@@ -105,7 +108,6 @@ This will create:
 
 ```bash
 mkdir -p products/product-slug
-cp products/project-deck/deck/slides.md products/product-slug/deck/slides.md
 ```
 
 ### Step 4: Customize Product Page Basics
@@ -180,8 +182,41 @@ The site will automatically deploy to IC mainnet via GitHub Actions.
 - **Product page:** `products/product-slug/index.html`
 - **Hero images:** `img/products/product-slug-hero.jpg` and `product-slug-social-preview.jpg`
 - **Homepage:** `index.html` (products-grid section)
-- **Template:** `products/project-deck/deck/slides.md`
-- **Pitch deck:** https://inturious.com/products/project-deck/deck/
+- **Deck template:** `decks/_template/src/slides.md`
+- **Live decks:** `https://inturious.com/decks/<deck-slug>/`
+
+## Adding a New Deck
+
+Decks are slidev presentations published under `inturious.com/decks/<slug>/`. They are independent of products — a deck can be a product pitch, a conference talk, or anything else.
+
+### Step 1: Scaffold from the template
+
+```bash
+mkdir -p decks/<deck-slug>/src
+cp decks/_template/src/{slides.md,package.json,.gitignore} decks/<deck-slug>/src/
+```
+
+### Step 2: Edit `decks/<deck-slug>/src/slides.md`
+
+Update the title, frontmatter, and content. Drop any static assets into `decks/<deck-slug>/src/public/` — slidev serves them at the deck root.
+
+### Step 3: Preview locally
+
+```bash
+cd decks/<deck-slug>/src
+pnpm install   # first time only
+pnpm dev       # opens http://localhost:3030
+```
+
+### Step 4: Commit and deploy
+
+```bash
+git add decks/<deck-slug>/
+git commit -m "Add <deck-slug> deck"
+git push
+```
+
+CI runs `scripts/build-decks.sh`, which builds each changed deck into `decks/<deck-slug>/` (alongside `src/`). The canister serves it at `https://inturious.com/decks/<deck-slug>/`. The `src/` folder and `_template/` are excluded from the canister upload via `.ic-assets.json5`.
 
 ## Contact
 

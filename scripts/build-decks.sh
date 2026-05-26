@@ -3,8 +3,14 @@
 # Build sli.dev decks (selective)
 # Only builds decks that have changed since the base ref
 #
+# Layout:
+#   decks/<slug>/src/    -> source (slides.md, package.json, public/)
+#   decks/<slug>/        -> built output (index.html, assets/) — served at /decks/<slug>/
+#
+# Decks whose folder name starts with "_" (e.g. _template) are skipped.
+#
 # Usage:
-#   ./build-decks.sh              # Build all decks (no selective)
+#   ./build-decks.sh              # Build all decks
 #   ./build-decks.sh origin/main  # Only build decks changed since origin/main
 #
 
@@ -12,72 +18,69 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-PRODUCTS_DIR="$ROOT_DIR/products"
+DECKS_DIR="$ROOT_DIR/decks"
 BASE_REF="${1:-}"
 
 echo "🎯 Building decks..."
-echo "Products directory: $PRODUCTS_DIR"
+echo "Decks directory: $DECKS_DIR"
 if [ -n "$BASE_REF" ]; then
   echo "Selective mode: comparing against $BASE_REF"
 fi
 
-# Track stats
 DECKS_BUILT=0
 DECKS_SKIPPED=0
 
-# Check if a path has changes compared to base ref
 has_changes() {
   local path="$1"
   if [ -z "$BASE_REF" ]; then
-    return 0  # No base ref = always build
+    return 0
   fi
-  # Check if any files changed in this path
   git diff --quiet "$BASE_REF" -- "$path" 2>/dev/null && return 1 || return 0
 }
 
-# Find all product directories with a slides-src folder
-for product_dir in "$PRODUCTS_DIR"/*/; do
-  product_name=$(basename "$product_dir")
-  slides_dir="$product_dir/slides-src"
-  deck_dir="$product_dir/deck"
+for deck_dir in "$DECKS_DIR"/*/; do
+  deck_name=$(basename "$deck_dir")
 
-  # Check if slides-src folder exists
-  if [ ! -d "$slides_dir" ]; then
-    echo "⏭️  $product_name: no slides-src/ folder, skipping"
+  # Skip underscore-prefixed entries (e.g. _template)
+  case "$deck_name" in
+    _*) echo "⏭️  $deck_name: underscore-prefixed, skipping"; continue ;;
+  esac
+
+  src_dir="$deck_dir/src"
+
+  if [ ! -d "$src_dir" ]; then
+    echo "⚠️  $deck_name: no src/ folder, skipping"
     continue
   fi
 
-  # Check if slides.md exists
-  if [ ! -f "$slides_dir/slides.md" ]; then
-    echo "⚠️  $product_name: slides-src/ exists but no slides.md, skipping"
+  if [ ! -f "$src_dir/slides.md" ]; then
+    echo "⚠️  $deck_name: src/ exists but no slides.md, skipping"
     continue
   fi
 
-  # Check if build is needed
-  if [ -d "$deck_dir" ] && ! has_changes "$slides_dir"; then
-    echo "⏭️  $product_name: no changes, skipping"
+  # Skip if no changes since base ref and a build already exists
+  if [ -f "$deck_dir/index.html" ] && ! has_changes "$src_dir"; then
+    echo "⏭️  $deck_name: no changes, skipping"
     DECKS_SKIPPED=$((DECKS_SKIPPED + 1))
     continue
   fi
 
   echo ""
-  echo "📦 Building deck for: $product_name"
+  echo "📦 Building deck: $deck_name"
 
-  # Build with correct base path (dependencies installed via pnpm at root)
-  BASE_PATH="/products/$product_name/deck/"
+  BASE_PATH="/decks/$deck_name/"
   echo "   Building with base: $BASE_PATH"
-  (cd "$slides_dir" && pnpm exec slidev build --base "$BASE_PATH" --out ../deck)
+  (cd "$src_dir" && pnpm exec slidev build --base "$BASE_PATH" --out ..)
 
   # Inject Google Analytics into the built deck
   DECK_INDEX="$deck_dir/index.html"
   if [ -f "$DECK_INDEX" ]; then
     echo "   Injecting Google Analytics..."
-    # Insert analytics script right before </head>
     sed -i.bak 's|</head>|<script src="/scripts/analytics.js" defer></script>\n</head>|' "$DECK_INDEX"
     rm -f "$DECK_INDEX.bak"
   fi
 
-  echo "✅ $product_name deck built successfully"
+  echo "✅ $deck_name built successfully"
   DECKS_BUILT=$((DECKS_BUILT + 1))
 done
 
