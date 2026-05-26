@@ -1,30 +1,21 @@
-# Draft decks (underscore-prefixed) — never deployed
-# Note: this strips drafts BEFORE the build runs, so build-decks.sh
-# also can't see them — which is what we want (no build = no leaked URL).
+# Draft decks (underscore-prefixed) — never deployed.
+# Stripped at upload time, so build-decks.sh can't see them either —
+# which is what we want (no build = no leaked URL).
 decks/_*/
 
-# Public deck source folders are intentionally NOT excluded here.
-# The build script needs them to produce decks/<slug>/index.html.
-# After the build, src/ stays in the deploy filesystem and is reachable
-# at /decks/<slug>/src/ — that's fine, the files are already public on GitHub.
-
-# IC canister artifacts — kept in repo for rollback, not deployed to Vercel
+# IC canister artifacts — kept in repo for rollback, not deployed to Vercel.
 .dfx/
 dfx.json
 canister_ids.json
 .ic-assets.json5
 .well-known/ic-domains
 
-# Repo metadata not needed at runtime.
-# Only the repo-root markdown is metadata; markdown inside products/ or decks/
-# may be needed (e.g. slidev's slides.md). So we list the repo-root files
-# explicitly instead of using a broad *.md rule that would catch them.
+# Repo metadata. Only root-level docs; markdown inside products/ or decks/
+# may be needed (slidev's slides.md), so don't use a broad *.md rule.
 /README.md
 /PLAN.md
 
 # Dev tooling. node_modules is gitignored locally so it never enters the
-# upload — but the build CREATES it inside the container. The buildCommand
-# rm's those before Vercel uploads the artifact to CDN.
+# upload, but the build CREATES it inside the container. The buildCommand
+# rm's it before Vercel uploads the artifact to CDN.
 node_modules/
-pnpm-workspace.yaml
-.github/

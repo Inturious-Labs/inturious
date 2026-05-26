@@ -4,45 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@slidev/cli': ^51.0.0
-  '@slidev/theme-default': latest
-
 importers:
 
-  .: {}
-
-  decks/_pitch-for-geo-startup/src:
-    dependencies:
-      '@slidev/cli':
-        specifier: ^51.0.0
-        version: 51.8.2(@babel/parser@7.29.7)(@nuxt/kit@3.21.6)(@types/markdown-it@14.1.2)(@types/node@22.19.19)(@vue/compiler-sfc@3.5.34)(markdown-it-async@2.2.0)(postcss@8.5.15)
-      '@slidev/theme-default':
-        specifier: latest
-        version: 0.25.0
-      '@slidev/theme-seriph':
-        specifier: latest
-        version: 0.25.0
-
-  decks/_template/src:
-    dependencies:
-      '@slidev/cli':
-        specifier: ^51.0.0
-        version: 51.8.2(@babel/parser@7.29.7)(@nuxt/kit@3.21.6)(@types/markdown-it@14.1.2)(@types/node@22.19.19)(@vue/compiler-sfc@3.5.34)(markdown-it-async@2.2.0)(postcss@8.5.15)
-      '@slidev/theme-default':
-        specifier: latest
-        version: 0.25.0
-
-  decks/how-to-use-ai-in-2026-for-content-creators/src:
-    dependencies:
-      '@slidev/cli':
-        specifier: ^51.0.0
-        version: 51.8.2(@babel/parser@7.29.7)(@nuxt/kit@3.21.6)(@types/markdown-it@14.1.2)(@types/node@22.19.19)(@vue/compiler-sfc@3.5.34)(markdown-it-async@2.2.0)(postcss@8.5.15)
-      '@slidev/theme-default':
-        specifier: latest
-        version: 0.25.0
-
-  decks/one-person-publication-stack/src:
+  .:
     dependencies:
       '@slidev/cli':
         specifier: ^51.0.0
@@ -768,10 +732,6 @@ packages:
     resolution: {integrity: sha512-iWvthH1Ny+i6gTwRnEeeU+EiqsHC56UdEO45bqLSNmymRAOWkKUJ/M0o7iahLzHSXsiPu71B7C715WxqjXk2hw==}
     engines: {node: '>=14.0.0', slidev: '>=v0.47.0'}
 
-  '@slidev/theme-seriph@0.25.0':
-    resolution: {integrity: sha512-PnFQbn4I70+/cVie5iAr0Im6sYvnwjkO7Yj5KonTyJZFFJFytckLTrD3ijft/J4cRnz7OmSzTyQKNX1FN/x0YQ==}
-    engines: {node: '>=14.0.0', slidev: '>=v0.47.0'}
-
   '@slidev/types@0.47.5':
     resolution: {integrity: sha512-X67V4cCgM0Sz50bP8GbVzmiL8DHC2IXvdKcsN7DlxHyf+/T4d9GveeGukwha5Fx3MuYeGZWKag7TFL2ZY4w54A==}
     engines: {node: '>=18.0.0'}
@@ -1451,8 +1411,8 @@ packages:
   dagre-d3-es@7.0.14:
     resolution: {integrity: sha512-P4rFMVq9ESWqmOgK+dlXvOtLwYg0i7u0HBGJER0LZDJT2VHIPAMZ/riPxqJceWMStH5+E61QxFra9kIS3AqdMg==}
 
-  dayjs@1.11.20:
-    resolution: {integrity: sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ==}
+  dayjs@1.11.21:
+    resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3610,12 +3570,6 @@ snapshots:
       codemirror-theme-vars: 0.1.2
       prism-theme-vars: 0.2.5
 
-  '@slidev/theme-seriph@0.25.0':
-    dependencies:
-      '@slidev/types': 0.47.5
-      codemirror-theme-vars: 0.1.2
-      prism-theme-vars: 0.2.5
-
   '@slidev/types@0.47.5': {}
 
   '@slidev/types@51.8.2(@nuxt/kit@3.21.6)(@vue/compiler-sfc@3.5.34)(markdown-it-async@2.2.0)(typescript@5.9.3)(vite@6.4.2(@types/node@22.19.19)(jiti@2.7.0)(yaml@2.9.0))':
@@ -4488,7 +4442,7 @@ snapshots:
       d3: 7.9.0
       lodash-es: 4.18.1
 
-  dayjs@1.11.20: {}
+  dayjs@1.11.21: {}
 
   debug@2.6.9:
     dependencies:
@@ -5101,7 +5055,7 @@ snapshots:
       d3: 7.9.0
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.14
-      dayjs: 1.11.20
+      dayjs: 1.11.21
       dompurify: 3.4.5
       es-toolkit: 1.47.0
       katex: 0.16.47
