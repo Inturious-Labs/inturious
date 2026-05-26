@@ -22,7 +22,9 @@ canister_ids.json
 /README.md
 /PLAN.md
 
-# Dev tooling
+# Dev tooling. node_modules is gitignored locally so it never enters the
+# upload — but the build CREATES it inside the container. The buildCommand
+# rm's those before Vercel uploads the artifact to CDN.
 node_modules/
 pnpm-workspace.yaml
 .github/
