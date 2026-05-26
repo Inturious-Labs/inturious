@@ -5,10 +5,8 @@
     "build": "echo 'Build handled by workflow'",
     "build:decks": "./scripts/build-decks.sh"
   },
-  "pnpm": {
-    "overrides": {
-      "@slidev/cli": "^51.0.0",
-      "@slidev/theme-default": "latest"
-    }
+  "dependencies": {
+    "@slidev/cli": "^51.0.0",
+    "@slidev/theme-default": "latest"
   }
 }

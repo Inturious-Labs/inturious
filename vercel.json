@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "buildCommand": "./scripts/build-decks.sh && python3 scripts/generate_sitemap.py && rm -rf node_modules decks/*/src/node_modules",
+  "buildCommand": "./scripts/build-decks.sh && python3 scripts/generate_sitemap.py && rm -rf node_modules",
   "installCommand": "pnpm install",
   "outputDirectory": ".",
   "cleanUrls": true,
