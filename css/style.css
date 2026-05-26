@@ -370,6 +370,15 @@ footer small {
   font-size: 1rem;
 }
 
+footer small a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+footer small a:hover {
+  color: #ffffff;
+}
+
 /* Social Links */
 .social-links {
   margin-bottom: 1rem;
