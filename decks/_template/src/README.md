@@ -8,11 +8,12 @@ This folder (`decks/_template/`) is the template itself and is NOT deployed (the
 
 ## Creating a New Deck
 
-1. Make the folder and copy the starter slides:
+1. Make the folder and copy the starter files:
    ```bash
    mkdir -p decks/<deck-slug>/src
-   cp decks/_template/src/slides.md decks/<deck-slug>/src/slides.md
+   cp decks/_template/src/{slides.md,style.css} decks/<deck-slug>/src/
    ```
+   `style.css` ships a small workaround that hides slidev's stuck "goto" dialog. Keep it.
 
 2. Edit `decks/<deck-slug>/src/slides.md` — update the title, frontmatter, and content.
 
