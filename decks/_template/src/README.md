@@ -23,6 +23,8 @@ This folder (`decks/_template/src/`) is the template itself — it is NOT deploy
 
 4. Commit. CI builds and deploys to `https://inturious.com/decks/<deck-slug>/`.
 
+5. When publishing publicly, add an entry to the "Talks & Decks" list in the root `index.html` (above the Portfolio section). Format: title link + `<span class="talks-meta">YYYY-MM-DD · City</span>`.
+
 ## Draft Mode
 
 Prefix the deck folder with an underscore (e.g. `decks/_my-draft/`) to keep it out of production:
