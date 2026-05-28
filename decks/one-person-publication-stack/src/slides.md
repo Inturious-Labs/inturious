@@ -6,7 +6,7 @@ info: |
   By Herbert Yang · Inturious Labs · May 28, 2026 · Shanghai
   https://inturious.com
 layout: cover
-background: https://cover.sli.dev
+background: /img/avi-richards-Z3ownETsdNQ-unsplash.jpg
 class: text-center
 drawings:
   persist: false
@@ -91,7 +91,7 @@ image: /img/peter.jpg
 
 ---
 layout: image-right
-image: /img/inturious.jpg
+image: /img/inturiousweb.jpg
 ---
 
 # 背景 2: Inturious Labs
