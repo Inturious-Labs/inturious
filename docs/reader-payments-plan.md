@@ -327,6 +327,9 @@ good outcome, not a failure.
 
 - Confirm crypto addresses (BTC, SOL, USDC, ICP account identifier)
 - Stripe: reuse existing DSC account or separate Inturious account for tips?
-- WeChat/Alipay: personal receiving QR, or skip. Carries identity-exposure
-  considerations given location and subject matter — deliberate call, not a default.
+- ~~WeChat/Alipay~~ — **out of scope** (decided 2026-08-23). They were the only methods
+  needing a verified business merchant entity for cross-border collection; the personal
+  receiving-QR fallback would tie a payment channel under a real identity to this
+  writing, which is a consideration worth avoiding rather than defaulting into. Crypto +
+  Stripe covers the readership. Revisit only if reader demand actually shows up.
 - Tip link copy — wording matters more than the 5% platform fees the research measured
