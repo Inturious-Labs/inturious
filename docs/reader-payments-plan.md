@@ -8,9 +8,6 @@
 `digital-sovereignty`, `sundayblender`, `remnants` (Hugo link shortcode) ·
 `herbertyang.xyz` (Docusaurus component)
 
-**Note:** the root `PLAN.md` in this repo is an unrelated, obsolete IC deployment plan
-(superseded by commit 557fe2a "Retire the IC fallback"). It is not this document.
-
 ---
 
 ## Context
