@@ -20,8 +20,11 @@ window.TIP_CONFIG = {
     hyx: { name: 'herbertyang.xyz',               accent: '#a78bfa' },
   },
 
-  // Suggested amounts. A blank field forces a decision; presets remove it.
-  // Crypto amounts are in native units; card amounts are in whole currency units.
+  // Suggested amounts, in US dollars. Readers cannot judge what a fraction of a coin
+  // is worth, so every button is priced in dollars and converted at display time from
+  // rates the API serves. `default` is preselected so tipping is one tap.
+  amountsUsd: [1, 2, 3, 5, 10],
+  defaultUsd: 3,
   methods: [
     {
       id: 'btc',
@@ -30,7 +33,8 @@ window.TIP_CONFIG = {
       address: 'PLACEHOLDER_BTC_ADDRESS',
       // BIP-21. `label` and `message` are wallet display text and never reach the chain.
       uri: (addr, amt) => `bitcoin:${addr}` + (amt ? `?amount=${amt}` : ''),
-      amounts: [0.0001, 0.0005, 0.001],
+      decimals: 8,
+      rateUrl: 'https://www.coingecko.com/en/coins/bitcoin',
       note: 'On-chain. Confirmations take a few minutes.',
     },
     {
@@ -45,7 +49,8 @@ window.TIP_CONFIG = {
         `solana:${addr}` +
         (amt ? `?amount=${amt}` : '') +
         (ref ? `${amt ? '&' : '?'}reference=${ref}` : ''),
-      amounts: [0.05, 0.25, 1],
+      decimals: 4,
+      rateUrl: 'https://www.coingecko.com/en/coins/solana',
       note: 'Fast and nearly free.',
     },
     {
@@ -58,7 +63,8 @@ window.TIP_CONFIG = {
       uri: (addr, amt) =>
         `ethereum:${TIP_CONFIG.usdcContract}@8453/transfer?address=${addr}` +
         (amt ? `&uint256=${Math.round(amt * 1e6)}` : ''),
-      amounts: [3, 10, 25],
+      decimals: 2,
+      rateUrl: 'https://www.coingecko.com/en/coins/usdc',
       note: 'On Base. A dollar stablecoin.',
     },
     {
@@ -68,7 +74,8 @@ window.TIP_CONFIG = {
       address: 'PLACEHOLDER_ICP_ACCOUNT_IDENTIFIER',
       // No widely supported URI scheme; wallets take a bare account identifier.
       uri: (addr) => addr,
-      amounts: [0.5, 2, 5],
+      decimals: 4,
+      rateUrl: 'https://www.coingecko.com/en/coins/internet-computer',
       note: 'Account identifier, not a principal ID.',
     },
   ],
@@ -76,9 +83,6 @@ window.TIP_CONFIG = {
   // USDC on Base.
   usdcContract: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
 
-  // Card tipping arrives with the Stripe work; the button stays hidden until then.
-  card: {
-    enabled: false,
-    amounts: [3, 10, 25],
-  },
+  // Card tipping arrives with the Stripe work; the section stays hidden until then.
+  card: { enabled: false },
 };

@@ -64,6 +64,40 @@
     } catch (e) { /* ignore */ }
   }
 
+  // ---- Rates ---------------------------------------------------------------
+
+  var rates = null;          // { btc: 77000, ... } once loaded
+  var ratesStale = false;
+
+  function loadRates() {
+    return fetch(CFG.api + '/api/tips/rates', { mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (d && d.rates) {
+          rates = d.rates;
+          ratesStale = !!d.stale;
+        }
+      })
+      .catch(function () { /* page still works without amounts */ });
+  }
+
+  // Dollars -> native units, trimmed to the asset's useful precision.
+  function toNative(usd, method) {
+    if (!rates || !rates[method.id]) return null;
+    var raw = usd / rates[method.id];
+    var d = method.decimals != null ? method.decimals : 6;
+    var v = Number(raw.toFixed(d));
+    return v > 0 ? v : null;
+  }
+
+  // Stablecoins sit at ~$1.00; assets worth thousands do not want cents.
+  function formatUsd(v) {
+    var opts = v >= 100 ? { maximumFractionDigits: 0 }
+             : v >= 1   ? { maximumFractionDigits: 2 }
+                        : { maximumFractionDigits: 4 };
+    return '$' + v.toLocaleString('en-US', opts);
+  }
+
   // ---- QR ------------------------------------------------------------------
 
   function qrDataUri(text) {
@@ -91,7 +125,7 @@
     el.appendChild(from);
   }
 
-  function renderMethod(m) {
+  function renderMethod(m, rerenderers) {
     var isPlaceholder = m.address.indexOf('PLACEHOLDER') === 0;
 
     var d = document.createElement('details');
@@ -115,26 +149,34 @@
       body.appendChild(note);
     }
 
-    var selected = null;
+    var selectedUsd = CFG.defaultUsd;
 
     var amounts = document.createElement('div');
     amounts.className = 'tip-amounts';
-    m.amounts.forEach(function (amt) {
+
+    CFG.amountsUsd.forEach(function (usd) {
       var b = document.createElement('button');
       b.className = 'tip-amount';
       b.type = 'button';
-      b.setAttribute('aria-pressed', 'false');
-      b.textContent = amt + ' ' + m.symbol;
+      b.dataset.usd = String(usd);
+      b.setAttribute('aria-pressed', String(usd === selectedUsd));
+
+      b.textContent = '$' + usd;
+
       b.addEventListener('click', function () {
-        selected = (selected === amt) ? null : amt;   // click again to clear
+        selectedUsd = (selectedUsd === usd) ? null : usd;   // click again to clear
         Array.prototype.forEach.call(amounts.children, function (c) {
-          c.setAttribute('aria-pressed', String(c === b && selected !== null));
+          c.setAttribute('aria-pressed', String(Number(c.dataset.usd) === selectedUsd));
         });
         update();
       });
       amounts.appendChild(b);
     });
     body.appendChild(amounts);
+
+    var rateNote = document.createElement('p');
+    rateNote.className = 'tip-rate-note';
+    body.appendChild(rateNote);
 
     var qrWrap = document.createElement('div');
     qrWrap.className = 'tip-qr';
@@ -163,7 +205,27 @@
     body.appendChild(open);
 
     function update() {
-      var uri = m.uri(m.address, selected, m.id === 'sol' ? visitRef : null);
+      // A single quoted rate, linked to the source it came from, so a reader who
+      // wants to check the number can do so in one click.
+      rateNote.textContent = '';
+      if (!rates || !rates[m.id]) {
+        rateNote.textContent = 'Live rates unavailable — send any amount to the address below.';
+      } else {
+        rateNote.appendChild(document.createTextNode(
+          '1 ' + m.symbol + ' \u2248 ' + formatUsd(rates[m.id])
+          + (ratesStale ? ' (a few minutes old)' : '') + ' \u00b7 '
+        ));
+        var link = document.createElement('a');
+        link.className = 'tip-rate-link';
+        link.href = m.rateUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'check on CoinGecko';
+        rateNote.appendChild(link);
+      }
+
+      var amt = selectedUsd == null ? null : toNative(selectedUsd, m);
+      var uri = m.uri(m.address, amt, m.id === 'sol' ? visitRef : null);
       qrWrap.innerHTML = '';
       var img = new Image();
       img.src = qrDataUri(uri);
@@ -175,6 +237,7 @@
     }
 
     update();
+    if (rerenderers) rerenderers.push(update);
 
     d.addEventListener('toggle', function () {
       if (d.open) report(m.id);
@@ -224,10 +287,17 @@
 
   var container = document.getElementById('methods');
   var anyPlaceholder = false;
+  var rerenderers = [];
 
   CFG.methods.forEach(function (m) {
     if (m.address.indexOf('PLACEHOLDER') === 0) anyPlaceholder = true;
-    container.appendChild(renderMethod(m));
+    container.appendChild(renderMethod(m, rerenderers));
+  });
+
+  // Render immediately with addresses, then fill in amounts when rates arrive.
+  // The page is useful either way; this only ever adds information.
+  loadRates().then(function () {
+    rerenderers.forEach(function (fn) { fn(); });
   });
 
   if (anyPlaceholder) {

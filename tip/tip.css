@@ -107,8 +107,10 @@
 
 .tip-amount {
   flex: 1 1 0;
-  min-width: 4.5rem;
-  padding: 0.5rem 0.4rem;
+  min-width: 3.2rem;
+  padding: 0.55rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
   border: 1px solid #555;
   border-radius: 8px;
   background: #3a3a3a;
@@ -121,6 +123,24 @@
 }
 
 .tip-amount:hover { border-color: var(--tip-accent, #22d3ee); background: #444; }
+
+/* One quoted rate, which a reader can check anywhere. Monospaced digits so it reads
+   as a figure rather than prose. */
+.tip-rate-note {
+  font-size: 0.78rem;
+  color: #9a9a9a;
+  margin: -0.5rem 0 1rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.tip-method-body a.tip-rate-link {
+  color: #9a9a9a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tip-method-body a.tip-rate-link:hover { color: var(--tip-accent, #22d3ee); }
 
 .tip-amount[aria-pressed="true"] {
   border-color: var(--tip-accent, #22d3ee);
@@ -220,7 +240,7 @@
 @media (max-width: 480px) {
   .tip-page { padding-top: 1.25rem; }
   .tip-amounts { gap: 0.4rem; }
-  .tip-amount { min-width: 3.8rem; font-size: 0.85rem; }
+  .tip-amount { min-width: 2.6rem; padding: 0.5rem 0.2rem; font-size: 0.95rem; }
   .tip-qr img { width: 160px; height: 160px; }
 }
 
