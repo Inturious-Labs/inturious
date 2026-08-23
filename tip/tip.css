@@ -94,13 +94,27 @@ body {
 
 
 .tip-method summary::-webkit-details-marker { display: none; }
+/* A chevron drawn from two borders rather than a glyph, so it renders the same in
+   every font. Points down when closed, up when open — the usual accordion cue. */
 .tip-method summary::after {
-  content: '+';
+  content: '';
   margin-left: auto;
-  color: #888;
-  font-weight: 400;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  flex: 0 0 auto;
+  align-self: center;
 }
-.tip-method[open] summary::after { content: '−'; }
+
+.tip-method[open] summary::after {
+  transform: rotate(-135deg) translate(-2px, -2px);
+  border-color: var(--tip-accent, #22d3ee);
+}
+
+.tip-method summary:hover::after { border-color: var(--tip-accent, #22d3ee); }
 .tip-method[open] { border-color: var(--tip-accent, #22d3ee); }
 
 .tip-method-symbol {
@@ -297,5 +311,5 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tip-amount, .tip-copy { transition: none; }
+  .tip-amount, .tip-copy, .tip-method summary::after { transition: none; }
 }
