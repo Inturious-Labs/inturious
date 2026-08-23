@@ -44,4 +44,80 @@ npm run dev
 
 ## Deployment
 
-Target: `api.inturious.com` (Linode Tokyo)
+Live at `https://api.inturious.com` (Linode Tokyo). First-time server setup is in
+`deploy/SETUP.md`; after that, `./deploy/deploy.sh` syncs, migrates, and restarts.
+
+## Reading the numbers
+
+SSH in and query the database directly — no token to manage.
+
+```bash
+ssh linode-tokyo-root
+DB=/var/lib/inturious-api/inturious.db
+```
+
+**Which articles send readers to the tip page**
+
+```bash
+sqlite3 -header -column $DB "
+  SELECT src, article, COUNT(*) AS visits
+    FROM tip_visits WHERE article IS NOT NULL
+   GROUP BY src, article ORDER BY visits DESC LIMIT 20;"
+```
+
+**Which newsletter converts best**
+
+```bash
+sqlite3 -header -column $DB "
+  SELECT src, COUNT(*) AS visits FROM tip_visits GROUP BY src ORDER BY visits DESC;"
+```
+
+**Which payment methods get clicked**
+
+```bash
+sqlite3 -header -column $DB "
+  SELECT method, COUNT(*) AS clicks FROM tip_visits
+   WHERE method IS NOT NULL GROUP BY method ORDER BY clicks DESC;"
+```
+
+**Daily visits, last 7 days**
+
+```bash
+sqlite3 -header -column $DB "
+  SELECT date(ts,'unixepoch','localtime') AS day, COUNT(*) AS visits
+    FROM tip_visits WHERE ts >= strftime('%s','now','-7 days')
+   GROUP BY day ORDER BY day DESC;"
+```
+
+**Card tips by article** (crypto tips cannot be attributed on-chain)
+
+```bash
+sqlite3 -header -column $DB "
+  SELECT src, article, COUNT(*) AS tips, SUM(amount_cents)/100.0 AS total
+    FROM tips GROUP BY src, article ORDER BY total DESC;"
+```
+
+**Interactive session**
+
+```bash
+sqlite3 $DB
+sqlite> .tables
+sqlite> .schema tip_visits
+sqlite> .headers on
+sqlite> .mode column
+sqlite> .quit
+```
+
+Timestamps are unix seconds. `src` is one of `dsc`, `tsb`, `rog`, `hyx`.
+
+There is also a `bin/tips` command that reads the same figures over HTTPS, for use from
+a workstation. It needs `INTURIOUS_STATS_TOKEN` (the `STATS_TOKEN` in the server's
+`.env`); querying over SSH avoids handling that secret at all.
+
+## Operations
+
+```bash
+systemctl status inturious-api          # is it running
+journalctl -u inturious-api -f          # follow logs
+systemctl restart inturious-api         # restart
+```
