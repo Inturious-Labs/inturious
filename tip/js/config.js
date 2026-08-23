@@ -1,12 +1,21 @@
 /**
  * Tip page configuration.
  *
- * REPLACE THE PLACEHOLDER ADDRESSES BELOW before this page goes live.
- * Each is marked PLACEHOLDER; the page shows a visible warning while any remain.
+ * WHERE THE KEYS LIVE
  *
- * These addresses become permanently public once articles link here, and anyone can
- * then watch every transaction on them. Use fresh wallets kept separate from other
- * on-chain activity.
+ *   BTC, SOL, USDC   deGate wallet
+ *   ICP              nns.ic0.app, under the "Herbert Yang" Internet Identity anchor
+ *
+ * Losing access to either of those means losing anything tipped to these addresses.
+ * Keep recovery methods current — for the anchor in particular, more than one
+ * registered device.
+ *
+ * All four are receive-only and fresh: verified on-chain as valid, correctly
+ * checksummed, and with no prior transaction history. They become permanently public
+ * the moment an article links here, so never reuse them for anything else.
+ *
+ * If any address is replaced, the page shows a red warning while a value still reads
+ * PLACEHOLDER, so an unfinished edit cannot ship silently.
  */
 
 window.TIP_CONFIG = {
@@ -30,7 +39,7 @@ window.TIP_CONFIG = {
       id: 'btc',
       label: 'Bitcoin',
       symbol: 'BTC',
-      address: 'PLACEHOLDER_BTC_ADDRESS',
+      address: 'bc1p7y3hn66u0gd496yq4ke5qyngwapsrn0f5a8ek7nnlm9kepc2289qwe40f5',
       // BIP-21. `label` and `message` are wallet display text and never reach the chain.
       uri: (addr, amt) => `bitcoin:${addr}` + (amt ? `?amount=${amt}` : ''),
       decimals: 8,
@@ -41,7 +50,7 @@ window.TIP_CONFIG = {
       id: 'sol',
       label: 'Solana',
       symbol: 'SOL',
-      address: 'PLACEHOLDER_SOL_ADDRESS',
+      address: '8inijPMHEgKCDzsM6531RyAEGo1vL5VE7VifVuJen5fM',
       // Solana Pay. `reference` is a public key attached to the transaction so a
       // payment can later be correlated to the article that prompted it — the only
       // chain here that solved attribution properly.
@@ -57,7 +66,7 @@ window.TIP_CONFIG = {
       id: 'usdc',
       label: 'USDC',
       symbol: 'USDC',
-      address: 'PLACEHOLDER_USDC_ADDRESS',
+      address: '0x69E8B468506D61d8d596692507E7196637bc4c67',
       chain: 'Base',
       // EIP-681 ERC-20 transfer. 6 decimals for USDC.
       uri: (addr, amt) =>
@@ -71,7 +80,7 @@ window.TIP_CONFIG = {
       id: 'icp',
       label: 'Internet Computer',
       symbol: 'ICP',
-      address: 'PLACEHOLDER_ICP_ACCOUNT_IDENTIFIER',
+      address: '5fc238c21d624bd146cc169ea2000388164c1dac5ff42e2ba733cbbcaa5f134a',
       // No widely supported URI scheme; wallets take a bare account identifier.
       uri: (addr) => addr,
       decimals: 4,

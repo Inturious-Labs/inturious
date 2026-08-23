@@ -18,6 +18,32 @@ python3 -m http.server 8000
 # visit http://localhost:8000/
 ```
 
+## Tip page
+
+`tip/` is a standalone page served at `tip.inturious.com`, linked from the footer of
+every newsletter. Readers pick a currency and get an address and QR code; nothing is
+held by a payment processor.
+
+**Wallet custody** — the receiving addresses live in `tip/js/config.js`:
+
+| Assets | Where the keys are |
+|---|---|
+| BTC, SOL, USDC (Base) | deGate wallet |
+| ICP | `nns.ic0.app`, under the "Herbert Yang" Internet Identity anchor |
+
+Losing access to either means losing anything tipped to those addresses. Keep recovery
+methods current — for the Internet Identity anchor especially, register more than one
+device.
+
+All four addresses were verified before going live: valid format, correct checksums
+(EIP-55 for the Base address, CRC32 for the ICP account identifier), and no prior
+transaction history. They are receive-only and permanently public once articles link
+here, so they are not reused anywhere else.
+
+Dollar amounts are converted using rates from `api.inturious.com/api/tips/rates`, which
+proxies CoinGecko so readers never contact a third party. If that is unreachable the
+page still shows every address and QR code, and says amounts are unavailable.
+
 ## Structure
 
 ```
