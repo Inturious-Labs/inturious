@@ -206,9 +206,6 @@
 
 /* Card */
 
-.tip-card-section { margin-top: 2rem; }
-.tip-card-section h2 { font-size: 1.1rem; }
-
 .tip-primary {
   width: 100%;
   padding: 0.75rem;
@@ -219,6 +216,27 @@
   font-weight: 600;
   cursor: pointer;
   margin: 0;
+}
+
+.tip-primary:disabled { opacity: 0.6; cursor: default; }
+
+.tip-card-error {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+/* Acknowledgement after returning from checkout. The tip is recorded by webhook;
+   this only tells the reader it worked. */
+.tip-thanks {
+  background: #14532d;
+  border: 1px solid #16a34a;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 /* Footer */

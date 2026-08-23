@@ -92,6 +92,11 @@ window.TIP_CONFIG = {
   // USDC on Base.
   usdcContract: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
 
-  // Card tipping arrives with the Stripe work; the section stays hidden until then.
-  card: { enabled: false },
+  // Card tipping. Shown as a fifth method so every option reads the same way.
+  card: {
+    enabled: true,
+    label: 'Card',
+    symbol: 'Visa · Mastercard · Amex',
+    note: 'Handled by Stripe. Apple Pay, Google Pay and others appear where supported.',
+  },
 };

@@ -249,6 +249,98 @@
     return d;
   }
 
+  // Card is rendered like the crypto methods, but instead of an address it shows a
+  // button that hands off to Stripe's hosted checkout.
+  function renderCard() {
+    var c = CFG.card;
+
+    var d = document.createElement('details');
+    d.className = 'tip-method';
+
+    var s = document.createElement('summary');
+    s.textContent = c.label;
+    var sym = document.createElement('span');
+    sym.className = 'tip-method-symbol';
+    sym.textContent = c.symbol;
+    s.appendChild(sym);
+    d.appendChild(s);
+
+    var body = document.createElement('div');
+    body.className = 'tip-method-body';
+
+    if (c.note) {
+      var note = document.createElement('p');
+      note.className = 'tip-note';
+      note.textContent = c.note;
+      body.appendChild(note);
+    }
+
+    var selectedUsd = CFG.defaultUsd;
+
+    var amounts = document.createElement('div');
+    amounts.className = 'tip-amounts';
+    CFG.amountsUsd.forEach(function (usd) {
+      var b = document.createElement('button');
+      b.className = 'tip-amount';
+      b.type = 'button';
+      b.dataset.usd = String(usd);
+      b.setAttribute('aria-pressed', String(usd === selectedUsd));
+      b.textContent = '$' + usd;
+      b.addEventListener('click', function () {
+        selectedUsd = usd;   // card always needs an amount, so no toggling off
+        Array.prototype.forEach.call(amounts.children, function (x) {
+          x.setAttribute('aria-pressed', String(Number(x.dataset.usd) === selectedUsd));
+        });
+        go.textContent = 'Tip $' + selectedUsd;
+      });
+      amounts.appendChild(b);
+    });
+    body.appendChild(amounts);
+
+    var go = document.createElement('button');
+    go.className = 'tip-primary';
+    go.type = 'button';
+    go.textContent = 'Tip $' + selectedUsd;
+    body.appendChild(go);
+
+    var err = document.createElement('p');
+    err.className = 'tip-card-error';
+    err.hidden = true;
+    body.appendChild(err);
+
+    go.addEventListener('click', function () {
+      go.disabled = true;
+      go.textContent = 'Opening checkout…';
+      err.hidden = true;
+
+      fetch(CFG.api + '/api/tips/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        body: JSON.stringify({
+          amount_usd: selectedUsd,
+          src: src || null,
+          article: article || null,
+        }),
+      })
+        .then(function (r) { return r.ok ? r.json() : r.json().then(function (j) { throw new Error(j.error || 'failed'); }); })
+        .then(function (j) {
+          if (!j.url) throw new Error('no checkout url');
+          window.location.href = j.url;
+        })
+        .catch(function (e) {
+          go.disabled = false;
+          go.textContent = 'Tip $' + selectedUsd;
+          err.textContent = 'Could not open checkout. Please try again, or use one of the options above.';
+          err.hidden = false;
+        });
+    });
+
+    d.addEventListener('toggle', function () { if (d.open) report('card'); });
+    d.appendChild(body);
+    return d;
+  }
+
   function copyText(text, btn) {
     var done = function () {
       var was = btn.textContent;
@@ -305,7 +397,17 @@
   }
 
   if (CFG.card.enabled) {
-    document.getElementById('card-section').hidden = false;
+    container.appendChild(renderCard());
+  }
+
+  // Stripe returns the reader here after a successful payment. The tip itself is
+  // recorded from the webhook, so this is only an acknowledgement.
+  if (params.get('tipped')) {
+    var thanks = document.getElementById('tip-thanks');
+    if (thanks) thanks.hidden = false;
+    var url = new URL(location);
+    url.searchParams.delete('tipped');
+    history.replaceState({}, '', url);
   }
 
   report(null);   // page view
