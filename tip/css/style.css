@@ -1,0 +1,300 @@
+/* Inturious Labs Custom Styles */
+
+:root {
+  --spacing-company: 3rem;
+  --product-color: #FFD6E8;
+}
+
+/* Background */
+body {
+  background-color: #2d2d2d;
+  color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+h2 {
+  color: #f472b6;
+}
+
+/* Product page section headings - use product color variable */
+.container section h2 {
+  color: var(--product-color);
+  opacity: 0.4;
+}
+
+p, li {
+  color: #f5f5f5;
+  line-height: 1.8;
+}
+
+a {
+  color: #22d3ee;
+}
+
+a:hover {
+  color: #67e8f9;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hero p {
+  color: #e0e0e0;
+}
+
+/* Hero Image Section */
+.hero-image-section {
+  position: relative;
+  margin: 1rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem 2rem 0.75rem 2rem;
+  text-align: center;
+}
+
+.hero-quote {
+  color: #ffffff;
+  font-style: italic;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+.hero-attribution {
+  color: #ffffff;
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+/* Navigation */
+.back-link {
+  margin-bottom: 2rem;
+}
+
+/* Product Page Layout - Constrain content width on desktop */
+.container {
+  max-width: 100%;
+}
+
+.container > section,
+.container > .back-link,
+.container > hr,
+.container > footer,
+.container > div:not(.hero-image-section) {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hero image same width as content */
+.container > .hero-image-section {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Products Section */
+.products {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.products h2 {
+  color: #ffffff !important;
+  opacity: 0.4;
+}
+
+.products-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  text-align: left;
+}
+
+.products-list li {
+  list-style: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.products-list li:last-child {
+  border-bottom: none;
+}
+
+.products-list a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  display: block;
+}
+
+.products-list a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.product-meta {
+  display: block;
+  color: #ffffff;
+  opacity: 0.5;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* About Section */
+section {
+  text-align: center;
+}
+
+section p {
+  color: #e0e0e0;
+}
+
+/* Footer */
+footer {
+  margin-top: var(--spacing-company);
+  padding: 2rem 0;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+footer p {
+  color: rgba(245, 245, 245, 0.4);
+  font-size: 1rem;
+}
+
+footer small {
+  color: rgba(245, 245, 245, 0.4);
+  font-size: 1rem;
+}
+
+footer small a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+footer small a:hover {
+  color: #ffffff;
+}
+
+/* Social Links */
+.social-links {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: rgba(245, 245, 245, 0.6);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-links a:hover {
+  color: #22d3ee;
+  transform: translateY(-2px);
+}
+
+/* Talks & Decks Section */
+.talks {
+  margin-top: 2rem;
+}
+
+.talks h2 {
+  color: #ffffff !important;
+  opacity: 0.4;
+  text-align: center;
+}
+
+.talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.talks-list li {
+  list-style: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.talks-list li:last-child {
+  border-bottom: none;
+}
+
+.talks-list a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.talks-list a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.talks-meta {
+  color: #ffffff;
+  opacity: 0.5;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero-quote {
+    font-size: 1rem !important;
+  }
+
+  .hero-attribution {
+    font-size: 0.85rem !important;
+  }
+
+  main.container {
+    padding-inline: 1.5rem;
+  }
+}
