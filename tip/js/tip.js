@@ -112,6 +112,7 @@
 
   function renderContext() {
     if (!src) return;
+    document.title = 'Buy me a coffee \u00b7 ' + CFG.sources[src].name;
     var el = document.getElementById('tip-context');
     var from = document.createElement('span');
     from.className = 'tip-from';
