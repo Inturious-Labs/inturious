@@ -92,8 +92,13 @@ The pull runs from home rather than being pushed from here, so that a public-fac
 server never holds credentials into the home network. The key it uses is confined by
 `rrsync` to read-only access on the backup directory and cannot obtain a shell — verified.
 
-The pull warns if the newest snapshot is more than two days old, since a backup that
-silently stops is worse than none.
+Each pull decompresses the newest snapshot and runs SQLite's own integrity check
+against it, then reports how many tips it holds. Gzip alone only proves the file
+survived the trip; this proves the contents are usable. A deliberately corrupted
+database was tested and correctly rejected.
+
+The pull also warns if the newest snapshot is more than two days old, since a backup
+that silently stops is worse than none.
 
 To restore:
 
