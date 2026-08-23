@@ -36,6 +36,21 @@ window.TIP_CONFIG = {
   defaultUsd: 3,
   methods: [
     {
+      id: 'usdc',
+      label: 'USDC',
+      symbol: 'USDC',
+      address: '0x69E8B468506D61d8d596692507E7196637bc4c67',
+      chain: 'Base',
+      // EIP-681 ERC-20 transfer. 6 decimals for USDC.
+      uri: (addr, amt) =>
+        `ethereum:${TIP_CONFIG.usdcContract}@8453/transfer?address=${addr}` +
+        (amt ? `&uint256=${Math.round(amt * 1e6)}` : ''),
+      decimals: 2,
+      rateUrl: 'https://www.coingecko.com/en/coins/usdc',
+      note: 'On Base. A dollar stablecoin.',
+    },
+
+    {
       id: 'btc',
       label: 'Bitcoin',
       symbol: 'BTC',
@@ -61,20 +76,6 @@ window.TIP_CONFIG = {
       decimals: 4,
       rateUrl: 'https://www.coingecko.com/en/coins/solana',
       note: 'Fast and nearly free.',
-    },
-    {
-      id: 'usdc',
-      label: 'USDC',
-      symbol: 'USDC',
-      address: '0x69E8B468506D61d8d596692507E7196637bc4c67',
-      chain: 'Base',
-      // EIP-681 ERC-20 transfer. 6 decimals for USDC.
-      uri: (addr, amt) =>
-        `ethereum:${TIP_CONFIG.usdcContract}@8453/transfer?address=${addr}` +
-        (amt ? `&uint256=${Math.round(amt * 1e6)}` : ''),
-      decimals: 2,
-      rateUrl: 'https://www.coingecko.com/en/coins/usdc',
-      note: 'On Base. A dollar stablecoin.',
     },
     {
       id: 'icp',

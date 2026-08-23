@@ -381,6 +381,12 @@
   var anyPlaceholder = false;
   var rerenderers = [];
 
+  // Card first: most readers do not hold crypto, and the first option gets
+  // disproportionate attention.
+  if (CFG.card.enabled) {
+    container.appendChild(renderCard());
+  }
+
   CFG.methods.forEach(function (m) {
     if (m.address.indexOf('PLACEHOLDER') === 0) anyPlaceholder = true;
     container.appendChild(renderMethod(m, rerenderers));
@@ -394,10 +400,6 @@
 
   if (anyPlaceholder) {
     document.getElementById('placeholder-warning').hidden = false;
-  }
-
-  if (CFG.card.enabled) {
-    container.appendChild(renderCard());
   }
 
   // Stripe returns the reader here after a successful payment. The tip itself is

@@ -108,6 +108,7 @@
 .tip-amount {
   flex: 1 1 0;
   min-width: 3.2rem;
+  min-height: 44px;          /* accessible tap target */
   padding: 0.55rem 0.3rem;
   font-size: 1rem;
   font-weight: 600;
@@ -183,6 +184,7 @@
 
 .tip-copy {
   flex: 0 0 auto;
+  min-height: 44px;
   padding: 0.5rem 0.9rem;
   border: 1px solid #555;
   border-radius: 8px;
@@ -208,6 +210,7 @@
 
 .tip-primary {
   width: 100%;
+  min-height: 48px;
   padding: 0.75rem;
   border: none;
   border-radius: 8px;
@@ -258,8 +261,18 @@
 @media (max-width: 480px) {
   .tip-page { padding-top: 1.25rem; }
   .tip-amounts { gap: 0.4rem; }
-  .tip-amount { min-width: 2.6rem; padding: 0.5rem 0.2rem; font-size: 0.95rem; }
+  .tip-amount { min-width: 3rem; padding: 0.5rem 0.2rem; font-size: 0.95rem; }
   .tip-qr img { width: 160px; height: 160px; }
+  .tip-method summary:not([role]) { padding: 0.9rem 1rem; }
+  .tip-method-body { padding: 0 1rem 1rem; }
+  .tip-address { font-size: 0.7rem; }
+}
+
+/* Narrow phones (iPhone SE and similar): five buttons across is too tight, so
+   let them wrap onto a second row at a usable size. */
+@media (max-width: 360px) {
+  .tip-amount { flex: 1 1 28%; min-width: 0; }
+  .tip-method-symbol { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
