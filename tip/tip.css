@@ -41,7 +41,15 @@
   color: #a0a0a0;
 }
 
-.tip-from .tip-article { color: var(--tip-accent, #22d3ee); }
+/* The publication carries the accent and the weight; the article slug is
+   confirmation detail and stays quiet. */
+.tip-from .tip-source-name {
+  color: var(--tip-accent, #22d3ee);
+  font-weight: 700;
+  font-size: 1.02em;
+}
+
+.tip-from .tip-article { color: inherit; opacity: 0.75; }
 
 /* Method cards */
 

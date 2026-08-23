@@ -116,7 +116,15 @@
     var el = document.getElementById('tip-context');
     var from = document.createElement('span');
     from.className = 'tip-from';
-    from.textContent = 'You came from ' + CFG.sources[src].name;
+    from.appendChild(document.createTextNode('You came from '));
+
+    // The publication name is the trust signal on a page asking for money from a
+    // domain the reader may not recognise, so it carries the emphasis.
+    var name = document.createElement('strong');
+    name.className = 'tip-source-name';
+    name.textContent = CFG.sources[src].name;
+    from.appendChild(name);
+
     if (article) {
       var a = document.createElement('span');
       a.className = 'tip-article';
