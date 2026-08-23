@@ -1,4 +1,5 @@
 import { logVisit, stats, SOURCES, METHODS } from '../../lib/tips/store.js';
+import { current as currentRates } from '../../lib/tips/rates.js';
 
 export default async function tipsRoutes(fastify) {
   // Telemetry from the tip page. Fire-and-forget from the client's perspective —
@@ -25,6 +26,19 @@ export default async function tipsRoutes(fastify) {
       request.log.error({ err }, 'failed to log tip visit');
     }
     return reply.code(204).send();
+  });
+
+  // Public. The tip page prices its dollar buttons from this, so readers never have
+  // to talk to the rate provider themselves.
+  fastify.get('/rates', async (request, reply) => {
+    const r = currentRates();
+    if (!r.rates) {
+      // Nothing cached yet. The page falls back to address-only, which still works.
+      return reply.code(503).send({ error: 'rates unavailable' });
+    }
+    // Cache briefly at the edge and in the browser; the data changes every 5 minutes.
+    reply.header('Cache-Control', 'public, max-age=60');
+    return r;
   });
 
   // Private. Read by the `tips` CLI and, later, a dashboard.

@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { open, migrate } from './lib/db.js';
 import tipsRoutes from './routes/tips/index.js';
+import { start as startRates } from './lib/tips/rates.js';
 
 const PORT = Number(process.env.PORT ?? 3001);
 const HOST = process.env.HOST ?? '127.0.0.1';
@@ -35,6 +36,9 @@ await fastify.register(rateLimit, {
 });
 
 fastify.get('/health', async () => ({ ok: true, ts: Math.floor(Date.now() / 1000) }));
+
+// Begin polling exchange rates so the first reader does not wait on a cold fetch.
+startRates(fastify.log);
 
 await fastify.register(tipsRoutes, { prefix: '/api/tips' });
 
