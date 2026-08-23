@@ -1,5 +1,18 @@
 /* Tip page. Inherits the site palette from css/style.css. */
 
+/* The shared stylesheet paints only <body>, which stops at the end of the content.
+   This page is short, so anything below it fell through to the white root. Paint the
+   root as well and let both fill the viewport. */
+html {
+  background-color: #2d2d2d;
+  min-height: 100%;
+}
+
+body {
+  background-color: #2d2d2d;
+  min-height: 100vh;
+}
+
 /* Pico drives <summary> colour through its own variables and wins the specificity
    contest with selectors like `details[open] > summary:not([role]):not(:focus)`.
    Setting the variables is more robust than escalating selectors. */
