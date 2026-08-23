@@ -69,17 +69,38 @@ Verify: `curl https://api.inturious.com/health`
 
 ## 8. Backups
 
-The database is one small file. Nightly copy to KunLun:
+Two stages, both running.
 
-```bash
-# crontab -e  (as root)
-15 3 * * * sqlite3 /var/lib/inturious-api/inturious.db ".backup '/tmp/inturious.db'" && rsync -az /tmp/inturious.db kunlun:backups/inturious-api/inturious-$(date +\%F).db && rm -f /tmp/inturious.db
+**On this server** — nightly snapshot at 03:15, kept 14 days:
+
+```
+/usr/local/bin/inturious-api-backup   →   /var/backups/inturious-api/
 ```
 
-`.backup` is used rather than copying the file directly — it is safe while the service
-is mid-write, which a plain `cp` is not.
+It uses `sqlite3 .backup` rather than copying the file, because `.backup` is safe while
+the service is mid-write and a plain `cp` can produce a corrupt copy. It fails loudly
+if the result is empty. Log: `/var/log/inturious-api-backup.log`.
 
-Requires `apt-get install -y sqlite3` and an SSH key from the VPS to KunLun.
+**On Dalaran** — nightly pull at 04:15, an hour later so there is always a fresh
+snapshot to collect:
+
+```
+~/bin/inturious-backup-pull   →   ~/backups/inturious-api/
+```
+
+The pull runs from home rather than being pushed from here, so that a public-facing web
+server never holds credentials into the home network. The key it uses is confined by
+`rrsync` to read-only access on the backup directory and cannot obtain a shell — verified.
+
+The pull warns if the newest snapshot is more than two days old, since a backup that
+silently stops is worse than none.
+
+To restore:
+
+```bash
+gunzip -c inturious-YYYY-MM-DD.db.gz > restored.db
+sqlite3 restored.db "PRAGMA integrity_check;"
+```
 
 ## Operations
 
