@@ -1,0 +1,35 @@
+[Unit]
+Description=Inturious API
+After=network.target
+
+[Service]
+Type=simple
+User=clayton
+WorkingDirectory=/home/clayton/inturious-api
+EnvironmentFile=/home/clayton/inturious-api/.env
+ExecStart=/usr/bin/node src/server.js
+Restart=always
+RestartSec=5
+
+# Readly shares this box. Keep a runaway here from taking it down with us.
+MemoryMax=256M
+CPUQuota=50%
+
+# The database directory is the only path this service may write to.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/inturious-api
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=inturious-api
+
+[Install]
+WantedBy=multi-user.target
