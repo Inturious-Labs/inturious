@@ -42,7 +42,7 @@ chmod 600 /home/clayton/inturious-api/.env
 
 ## 5. First deploy
 
-From a workstation: `./deploy/deploy.sh`
+From a workstation, on a clean `main`: `./api/deploy/deploy.sh` (it exports `api/` from `origin/main`, so what lands is always a pushed commit)
 
 (It expects the unit file from step 6 to exist; on the very first run, copy the unit
 in before deploying, or expect the restart step to fail and rerun after.)
