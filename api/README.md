@@ -3,8 +3,9 @@
 Server-side services for Inturious properties. Runs on Linode Tokyo, not Vercel —
 these are long-running processes with local state, deployed by rsync + systemd.
 
-**Sibling repo:** `inturious-site` (static site + tip page, deploys to Vercel).
-The split is by deploy target: everything static there, everything server-side here.
+**Siblings:** `../site` (inturious.com) and `../tip` (the tip page, this API's only
+client). Each folder deploys on its own; see the root README for the order to follow
+when a change spans the tip page and the API.
 
 ## Services
 
@@ -14,7 +15,7 @@ The split is by deploy target: everything static there, everything server-side h
 
 ## Stack
 
-- Node + Express
+- Node + Fastify
 - SQLite via `better-sqlite3` — embedded, the database file sits next to the process
 - systemd unit, nginx reverse proxy, Let's Encrypt
 
@@ -33,7 +34,7 @@ migrations/        schema
 deploy/            systemd unit, nginx vhost
 ```
 
-Route handlers stay thin so the logic in `lib/` is not tied to Express or to this box.
+Route handlers stay thin so the logic in `lib/` is not tied to Fastify or to this box.
 
 ## Local development
 
@@ -45,7 +46,10 @@ npm run dev
 ## Deployment
 
 Live at `https://api.inturious.com` (Linode Tokyo). First-time server setup is in
-`deploy/SETUP.md`; after that, `./deploy/deploy.sh` syncs, migrates, and restarts.
+`deploy/SETUP.md`; after that, `./api/deploy/deploy.sh` from a clean `main` at the repo
+root exports this folder at `origin/main`, syncs, migrates, and restarts. It refuses a
+dirty or unpushed tree, and `--dry-run` shows what would change without touching the
+server.
 
 ## Reading the numbers
 

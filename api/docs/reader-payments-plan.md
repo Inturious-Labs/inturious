@@ -1,5 +1,10 @@
 # Tipping + Paywall — Implementation Plan
 
+> **Historical record (2026-09-07).** This is the original design. Two parts were
+> superseded while building: `sqld`/libSQL became `better-sqlite3` in-process, and the
+> separate `tip` repo with Vercel functions became `api/` in this repo, a plain Node
+> process on Linode. The storage measurements and the reasoning still stand.
+
 **Branch:** `feature/reader-payments` (renamed from `feature/paywall-system`)
 **Date:** 2026-08-23
 **Supersedes:** `digital-sovereignty/PAYWALL_DESIGN.md` (2025-09-14, IC-canister era)

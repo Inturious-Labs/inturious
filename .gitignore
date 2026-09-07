@@ -11,10 +11,10 @@
 *.swo
 *~
 
-# Environment variables
+# Environment variables (api/.env holds live keys; only .env.example is tracked)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
 # Logs
 logs/
