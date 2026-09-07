@@ -1,5 +1,6 @@
 {
   "framework": null,
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- .",
   "buildCommand": "./scripts/build-decks.sh && python3 scripts/generate_sitemap.py && rm -rf node_modules",
   "installCommand": "pnpm install",
   "outputDirectory": ".",
