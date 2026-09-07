@@ -160,12 +160,23 @@ body {
 
 .tip-amount:hover { border-color: var(--tip-accent, #22d3ee); background: #444; }
 
+/* The amount to send, in the asset's own units. The one number a reader acts on,
+   so it is the largest figure in the section. */
+.tip-native {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 0 0 1rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 /* One quoted rate, which a reader can check anywhere. Monospaced digits so it reads
    as a figure rather than prose. */
 .tip-rate-note {
   font-size: 0.78rem;
   color: #9a9a9a;
-  margin: -0.5rem 0 1rem;
+  margin: -0.5rem 0 0.35rem;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }

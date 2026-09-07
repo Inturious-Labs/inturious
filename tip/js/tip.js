@@ -90,6 +90,12 @@
     return v > 0 ? v : null;
   }
 
+  // Native units at the asset's own precision, grouped for readability.
+  function formatNative(v, method) {
+    var d = method.decimals != null ? method.decimals : 6;
+    return v.toLocaleString('en-US', { maximumFractionDigits: d });
+  }
+
   // Stablecoins sit at ~$1.00; assets worth thousands do not want cents.
   function formatUsd(v) {
     var opts = v >= 100 ? { maximumFractionDigits: 0 }
@@ -215,6 +221,12 @@
     rateNote.className = 'tip-rate-note';
     body.appendChild(rateNote);
 
+    // The figure to send, printed so a reader who copies the address by hand does
+    // not have to do the conversion. The QR and wallet link carry the same number.
+    var native = document.createElement('p');
+    native.className = 'tip-native';
+    body.appendChild(native);
+
     var qrWrap = document.createElement('div');
     qrWrap.className = 'tip-qr';
     body.appendChild(qrWrap);
@@ -246,7 +258,7 @@
       // wants to check the number can do so in one click.
       rateNote.textContent = '';
       if (!rates || !rates[m.id]) {
-        rateNote.textContent = 'Live rates unavailable — send any amount to the address below.';
+        rateNote.textContent = 'Live rate unavailable';
       } else {
         rateNote.appendChild(document.createTextNode(
           '1 ' + m.symbol + ' \u2248 ' + formatUsd(rates[m.id])
@@ -262,6 +274,12 @@
       }
 
       var amt = selectedUsd == null ? null : toNative(selectedUsd, m);
+      // One shape, always: "Send <figure> BTC". Until a rate is in, an ellipsis
+      // holds the figure's place. With nothing selected, point back to the pills.
+      native.textContent = selectedUsd == null
+        ? 'Pick an amount above'
+        : 'Send ' + (amt == null ? '\u2026' : formatNative(amt, m)) + ' ' + m.symbol;
+
       var uri = m.uri(m.address, amt, m.id === 'sol' ? visitRef : null);
       qrWrap.innerHTML = '';
       var img = new Image();
@@ -427,8 +445,25 @@
 
   // Render immediately with addresses, then fill in amounts when rates arrive.
   // The page is useful either way; this only ever adds information.
-  loadRates().then(function () {
-    rerenderers.forEach(function (fn) { fn(); });
+  //
+  // Rates are refreshed while the tab stays open, and again when the reader comes
+  // back to it, so a QR scanned an hour later still carries a current figure. There
+  // is no expiry: a tip has no invoice to reconcile, whatever arrives is the tip.
+  var RATE_REFRESH_MS = 5 * 60 * 1000;
+  var ratesFetchedAt = 0;
+  function refreshRates(force) {
+    if (!force && Date.now() - ratesFetchedAt < 60 * 1000) return;
+    ratesFetchedAt = Date.now();
+    loadRates().then(function () {
+      rerenderers.forEach(function (fn) { fn(); });
+    });
+  }
+  refreshRates(true);
+  setInterval(function () {
+    if (document.visibilityState === 'visible') refreshRates(true);
+  }, RATE_REFRESH_MS);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') refreshRates(false);
   });
 
   if (anyPlaceholder) {
