@@ -50,7 +50,9 @@ echo "→ exporting api/ at $SHORT"
 git archive "$REV" api | tar -x -C "$STAGE"
 echo "$REV" > "$STAGE/api/REVISION"
 
-RSYNC_OPTS=(-az --delete
+# --checksum: the export rewrites every timestamp, so compare content instead, and a
+# dry run lists only files whose bytes actually differ.
+RSYNC_OPTS=(-az --delete --checksum
   --exclude 'node_modules'
   --exclude '.env'
   --exclude '*.db' --exclude '*.db-shm' --exclude '*.db-wal')
