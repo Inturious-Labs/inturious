@@ -185,6 +185,21 @@ body {
   font-weight: 600;
 }
 
+/* The supporter option sits on its own row under the small amounts, full width,
+   with the amount and what it stands for on one line. */
+.tip-amount-supporter {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.tip-amount-supporter small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
 /* QR + address */
 
 .tip-qr {
@@ -307,6 +322,7 @@ body {
    let them wrap onto a second row at a usable size. */
 @media (max-width: 360px) {
   .tip-amount { flex: 1 1 28%; min-width: 0; }
+  .tip-amount-supporter { flex-basis: 100%; }
   .tip-method-symbol { display: none; }
 }
 

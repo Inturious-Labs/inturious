@@ -110,6 +110,40 @@
 
   // ---- Rendering -----------------------------------------------------------
 
+  // One amount button. The supporter option renders as a full-width bar with its
+  // label, so it reads as "back a year" rather than as a very large coffee.
+  function amountButton(usd, selected, supporter) {
+    var b = document.createElement('button');
+    b.className = 'tip-amount' + (supporter ? ' tip-amount-supporter' : '');
+    b.type = 'button';
+    b.dataset.usd = String(usd);
+    b.setAttribute('aria-pressed', String(usd === selected));
+    if (supporter) {
+      var label = document.createElement('span');
+      label.textContent = supporter.label;
+      var note = document.createElement('small');
+      note.textContent = '$' + usd + ' \u00b7 ' + supporter.note;
+      b.appendChild(label);
+      b.appendChild(note);
+    } else {
+      b.textContent = '$' + usd;
+    }
+    return b;
+  }
+
+  // Label for the card checkout button, matching what the reader selected.
+  function goLabel(usd) {
+    if (CFG.supporter && usd === CFG.supporter.usd) return 'Become an Annual Supporter \u00b7 $' + usd;
+    return 'Tip $' + usd;
+  }
+
+  // Every suggested amount in order, the supporter bar last.
+  function amountOptions() {
+    var list = CFG.amountsUsd.map(function (usd) { return { usd: usd }; });
+    if (CFG.supporter) list.push({ usd: CFG.supporter.usd, supporter: CFG.supporter });
+    return list;
+  }
+
   function renderContext() {
     if (!src) return;
     document.title = 'Buy me a coffee \u00b7 ' + CFG.sources[src].name;
@@ -163,15 +197,9 @@
     var amounts = document.createElement('div');
     amounts.className = 'tip-amounts';
 
-    CFG.amountsUsd.forEach(function (usd) {
-      var b = document.createElement('button');
-      b.className = 'tip-amount';
-      b.type = 'button';
-      b.dataset.usd = String(usd);
-      b.setAttribute('aria-pressed', String(usd === selectedUsd));
-
-      b.textContent = '$' + usd;
-
+    amountOptions().forEach(function (opt) {
+      var usd = opt.usd;
+      var b = amountButton(usd, selectedUsd, opt.supporter);
       b.addEventListener('click', function () {
         selectedUsd = (selectedUsd === usd) ? null : usd;   // click again to clear
         Array.prototype.forEach.call(amounts.children, function (c) {
@@ -288,19 +316,15 @@
 
     var amounts = document.createElement('div');
     amounts.className = 'tip-amounts';
-    CFG.amountsUsd.forEach(function (usd) {
-      var b = document.createElement('button');
-      b.className = 'tip-amount';
-      b.type = 'button';
-      b.dataset.usd = String(usd);
-      b.setAttribute('aria-pressed', String(usd === selectedUsd));
-      b.textContent = '$' + usd;
+    amountOptions().forEach(function (opt) {
+      var usd = opt.usd;
+      var b = amountButton(usd, selectedUsd, opt.supporter);
       b.addEventListener('click', function () {
         selectedUsd = usd;   // card always needs an amount, so no toggling off
         Array.prototype.forEach.call(amounts.children, function (x) {
           x.setAttribute('aria-pressed', String(Number(x.dataset.usd) === selectedUsd));
         });
-        go.textContent = 'Tip $' + selectedUsd;
+        go.textContent = goLabel(selectedUsd);
       });
       amounts.appendChild(b);
     });
@@ -309,7 +333,7 @@
     var go = document.createElement('button');
     go.className = 'tip-primary';
     go.type = 'button';
-    go.textContent = 'Tip $' + selectedUsd;
+    go.textContent = goLabel(selectedUsd);
     body.appendChild(go);
 
     var err = document.createElement('p');
@@ -339,7 +363,7 @@
         })
         .catch(function (e) {
           go.disabled = false;
-          go.textContent = 'Tip $' + selectedUsd;
+          go.textContent = goLabel(selectedUsd);
           err.textContent = 'Could not open checkout. Please try again, or use one of the options above.';
           err.hidden = false;
         });

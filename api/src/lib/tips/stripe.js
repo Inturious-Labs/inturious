@@ -25,11 +25,16 @@ export function isConfigured() {
 // A stable label so these sessions are identifiable in the Dashboard.
 const INTEGRATION_ID = 'inturious-tips-qkzvhrmt';
 
+// At or above this amount the tip page offers "Annual Supporter" — a reader backing a
+// full year. Same flow, but named so it stands out in the Dashboard.
+const SUPPORTER_CENTS = 5000;
+
 export async function createCheckoutSession({ amountCents, src, article, origin }) {
   const stripe = getClient();
   if (!stripe) throw new Error('stripe not configured');
 
   const base = process.env.TIP_PAGE_URL || origin || 'https://tip.inturious.com';
+  const supporter = amountCents >= SUPPORTER_CENTS;
 
   return stripe.checkout.sessions.create({
     mode: 'payment',
@@ -40,10 +45,12 @@ export async function createCheckoutSession({ amountCents, src, article, origin 
         currency: 'usd',
         unit_amount: amountCents,
         product_data: {
-          name: 'Tip',
-          description: article
-            ? `For "${article.replace(/-/g, ' ')}"`
-            : 'Thanks for reading',
+          name: supporter ? 'Annual Supporter' : 'Tip',
+          description: supporter
+            ? 'One full year of the newsletter'
+            : article
+              ? `For "${article.replace(/-/g, ' ')}"`
+              : 'Thanks for reading',
         },
       },
       quantity: 1,
@@ -53,6 +60,7 @@ export async function createCheckoutSession({ amountCents, src, article, origin 
     metadata: {
       src: src || '',
       article: article || '',
+      kind: supporter ? 'supporter' : 'tip',
     },
     integration_identifier: INTEGRATION_ID,
     success_url: `${base}/?tipped=1`,
