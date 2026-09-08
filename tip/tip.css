@@ -160,12 +160,23 @@ body {
 
 .tip-amount:hover { border-color: var(--tip-accent, #22d3ee); background: #444; }
 
+/* The amount to send, in the asset's own units. The one number a reader acts on,
+   so it is the largest figure in the section. */
+.tip-native {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 0 0 1rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 /* One quoted rate, which a reader can check anywhere. Monospaced digits so it reads
    as a figure rather than prose. */
 .tip-rate-note {
   font-size: 0.78rem;
   color: #9a9a9a;
-  margin: -0.5rem 0 1rem;
+  margin: -0.5rem 0 0.35rem;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
@@ -180,9 +191,25 @@ body {
 
 .tip-amount[aria-pressed="true"] {
   border-color: var(--tip-accent, #22d3ee);
-  background: var(--tip-accent, #22d3ee);
-  color: #1a1a1a;
+  box-shadow: inset 0 0 0 1px var(--tip-accent, #22d3ee);
+  color: var(--tip-accent, #22d3ee);
+  background: #3a3a3a;
   font-weight: 600;
+}
+
+/* The supporter option sits on its own row under the small amounts, full width,
+   with the amount and what it stands for on one line. */
+.tip-amount-supporter {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.tip-amount-supporter small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: 0.85;
 }
 
 /* QR + address */
@@ -307,6 +334,7 @@ body {
    let them wrap onto a second row at a usable size. */
 @media (max-width: 360px) {
   .tip-amount { flex: 1 1 28%; min-width: 0; }
+  .tip-amount-supporter { flex-basis: 100%; }
   .tip-method-symbol { display: none; }
 }
 

@@ -34,6 +34,10 @@ window.TIP_CONFIG = {
   // rates the API serves. `default` is preselected so tipping is one tap.
   amountsUsd: [1, 2, 3, 5, 10],
   defaultUsd: 3,
+
+  // One larger option for readers who want to back a year of the newsletter rather
+  // than a single article. It is still a tip: no paywall, no tiers, nothing owed.
+  supporter: { usd: 50, label: 'Annual Supporter', note: 'one full year' },
   methods: [
     {
       id: 'usdc',

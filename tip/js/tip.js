@@ -90,6 +90,12 @@
     return v > 0 ? v : null;
   }
 
+  // Native units at the asset's own precision, grouped for readability.
+  function formatNative(v, method) {
+    var d = method.decimals != null ? method.decimals : 6;
+    return v.toLocaleString('en-US', { maximumFractionDigits: d });
+  }
+
   // Stablecoins sit at ~$1.00; assets worth thousands do not want cents.
   function formatUsd(v) {
     var opts = v >= 100 ? { maximumFractionDigits: 0 }
@@ -109,6 +115,37 @@
   }
 
   // ---- Rendering -----------------------------------------------------------
+
+  // The card button names the action only; the selected pill already shows the amount.
+  var GO_LABEL = 'Continue to checkout';
+
+  // One amount button. The supporter option renders as a full-width bar with its
+  // label, so it reads as "back a year" rather than as a very large coffee.
+  function amountButton(usd, selected, supporter) {
+    var b = document.createElement('button');
+    b.className = 'tip-amount' + (supporter ? ' tip-amount-supporter' : '');
+    b.type = 'button';
+    b.dataset.usd = String(usd);
+    b.setAttribute('aria-pressed', String(usd === selected));
+    if (supporter) {
+      var label = document.createElement('span');
+      label.textContent = supporter.label;
+      var note = document.createElement('small');
+      note.textContent = '$' + usd + ' \u00b7 ' + supporter.note;
+      b.appendChild(label);
+      b.appendChild(note);
+    } else {
+      b.textContent = '$' + usd;
+    }
+    return b;
+  }
+
+  // Every suggested amount in order, the supporter bar last.
+  function amountOptions() {
+    var list = CFG.amountsUsd.map(function (usd) { return { usd: usd }; });
+    if (CFG.supporter) list.push({ usd: CFG.supporter.usd, supporter: CFG.supporter });
+    return list;
+  }
 
   function renderContext() {
     if (!src) return;
@@ -163,15 +200,9 @@
     var amounts = document.createElement('div');
     amounts.className = 'tip-amounts';
 
-    CFG.amountsUsd.forEach(function (usd) {
-      var b = document.createElement('button');
-      b.className = 'tip-amount';
-      b.type = 'button';
-      b.dataset.usd = String(usd);
-      b.setAttribute('aria-pressed', String(usd === selectedUsd));
-
-      b.textContent = '$' + usd;
-
+    amountOptions().forEach(function (opt) {
+      var usd = opt.usd;
+      var b = amountButton(usd, selectedUsd, opt.supporter);
       b.addEventListener('click', function () {
         selectedUsd = (selectedUsd === usd) ? null : usd;   // click again to clear
         Array.prototype.forEach.call(amounts.children, function (c) {
@@ -186,6 +217,12 @@
     var rateNote = document.createElement('p');
     rateNote.className = 'tip-rate-note';
     body.appendChild(rateNote);
+
+    // The figure to send, printed so a reader who copies the address by hand does
+    // not have to do the conversion. The QR and wallet link carry the same number.
+    var native = document.createElement('p');
+    native.className = 'tip-native';
+    body.appendChild(native);
 
     var qrWrap = document.createElement('div');
     qrWrap.className = 'tip-qr';
@@ -218,7 +255,7 @@
       // wants to check the number can do so in one click.
       rateNote.textContent = '';
       if (!rates || !rates[m.id]) {
-        rateNote.textContent = 'Live rates unavailable — send any amount to the address below.';
+        rateNote.textContent = 'Live rate unavailable';
       } else {
         rateNote.appendChild(document.createTextNode(
           '1 ' + m.symbol + ' \u2248 ' + formatUsd(rates[m.id])
@@ -234,6 +271,12 @@
       }
 
       var amt = selectedUsd == null ? null : toNative(selectedUsd, m);
+      // One shape, always: "Send <figure> BTC". Until a rate is in, an ellipsis
+      // holds the figure's place. With nothing selected, point back to the pills.
+      native.textContent = selectedUsd == null
+        ? 'Pick an amount above'
+        : 'Send ' + (amt == null ? '\u2026' : formatNative(amt, m)) + ' ' + m.symbol;
+
       var uri = m.uri(m.address, amt, m.id === 'sol' ? visitRef : null);
       qrWrap.innerHTML = '';
       var img = new Image();
@@ -288,19 +331,15 @@
 
     var amounts = document.createElement('div');
     amounts.className = 'tip-amounts';
-    CFG.amountsUsd.forEach(function (usd) {
-      var b = document.createElement('button');
-      b.className = 'tip-amount';
-      b.type = 'button';
-      b.dataset.usd = String(usd);
-      b.setAttribute('aria-pressed', String(usd === selectedUsd));
-      b.textContent = '$' + usd;
+    amountOptions().forEach(function (opt) {
+      var usd = opt.usd;
+      var b = amountButton(usd, selectedUsd, opt.supporter);
       b.addEventListener('click', function () {
         selectedUsd = usd;   // card always needs an amount, so no toggling off
         Array.prototype.forEach.call(amounts.children, function (x) {
           x.setAttribute('aria-pressed', String(Number(x.dataset.usd) === selectedUsd));
         });
-        go.textContent = 'Tip $' + selectedUsd;
+        go.textContent = GO_LABEL;
       });
       amounts.appendChild(b);
     });
@@ -309,7 +348,7 @@
     var go = document.createElement('button');
     go.className = 'tip-primary';
     go.type = 'button';
-    go.textContent = 'Tip $' + selectedUsd;
+    go.textContent = GO_LABEL;
     body.appendChild(go);
 
     var err = document.createElement('p');
@@ -339,7 +378,7 @@
         })
         .catch(function (e) {
           go.disabled = false;
-          go.textContent = 'Tip $' + selectedUsd;
+          go.textContent = GO_LABEL;
           err.textContent = 'Could not open checkout. Please try again, or use one of the options above.';
           err.hidden = false;
         });
@@ -403,8 +442,25 @@
 
   // Render immediately with addresses, then fill in amounts when rates arrive.
   // The page is useful either way; this only ever adds information.
-  loadRates().then(function () {
-    rerenderers.forEach(function (fn) { fn(); });
+  //
+  // Rates are refreshed while the tab stays open, and again when the reader comes
+  // back to it, so a QR scanned an hour later still carries a current figure. There
+  // is no expiry: a tip has no invoice to reconcile, whatever arrives is the tip.
+  var RATE_REFRESH_MS = 5 * 60 * 1000;
+  var ratesFetchedAt = 0;
+  function refreshRates(force) {
+    if (!force && Date.now() - ratesFetchedAt < 60 * 1000) return;
+    ratesFetchedAt = Date.now();
+    loadRates().then(function () {
+      rerenderers.forEach(function (fn) { fn(); });
+    });
+  }
+  refreshRates(true);
+  setInterval(function () {
+    if (document.visibilityState === 'visible') refreshRates(true);
+  }, RATE_REFRESH_MS);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') refreshRates(false);
   });
 
   if (anyPlaceholder) {
