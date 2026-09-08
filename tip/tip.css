@@ -191,8 +191,9 @@ body {
 
 .tip-amount[aria-pressed="true"] {
   border-color: var(--tip-accent, #22d3ee);
-  background: var(--tip-accent, #22d3ee);
-  color: #1a1a1a;
+  box-shadow: inset 0 0 0 1px var(--tip-accent, #22d3ee);
+  color: var(--tip-accent, #22d3ee);
+  background: #3a3a3a;
   font-weight: 600;
 }
 

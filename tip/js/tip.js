@@ -116,6 +116,9 @@
 
   // ---- Rendering -----------------------------------------------------------
 
+  // The card button names the action only; the selected pill already shows the amount.
+  var GO_LABEL = 'Continue to checkout';
+
   // One amount button. The supporter option renders as a full-width bar with its
   // label, so it reads as "back a year" rather than as a very large coffee.
   function amountButton(usd, selected, supporter) {
@@ -135,12 +138,6 @@
       b.textContent = '$' + usd;
     }
     return b;
-  }
-
-  // Label for the card checkout button, matching what the reader selected.
-  function goLabel(usd) {
-    if (CFG.supporter && usd === CFG.supporter.usd) return 'Become an Annual Supporter \u00b7 $' + usd;
-    return 'Tip $' + usd;
   }
 
   // Every suggested amount in order, the supporter bar last.
@@ -342,7 +339,7 @@
         Array.prototype.forEach.call(amounts.children, function (x) {
           x.setAttribute('aria-pressed', String(Number(x.dataset.usd) === selectedUsd));
         });
-        go.textContent = goLabel(selectedUsd);
+        go.textContent = GO_LABEL;
       });
       amounts.appendChild(b);
     });
@@ -351,7 +348,7 @@
     var go = document.createElement('button');
     go.className = 'tip-primary';
     go.type = 'button';
-    go.textContent = goLabel(selectedUsd);
+    go.textContent = GO_LABEL;
     body.appendChild(go);
 
     var err = document.createElement('p');
@@ -381,7 +378,7 @@
         })
         .catch(function (e) {
           go.disabled = false;
-          go.textContent = goLabel(selectedUsd);
+          go.textContent = GO_LABEL;
           err.textContent = 'Could not open checkout. Please try again, or use one of the options above.';
           err.hidden = false;
         });
